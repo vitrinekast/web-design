@@ -8,5 +8,5 @@ Web Design gaat over het vormgeven van Interactie. Het voordeel van een Frontend
 Het vak bestaat uit 3 opdrachten:
 
 1. [Verschillende versies van een Use Case testen en demonstreren](/opdracht1)
-2. [Online magazine](/opdracht1#opdracht-1b---online-magazine)
-3. [Opdracht 2 - Maak een website voor echte mensen](/opdracht2)
+2. [Online magazine maken](/opdracht1#opdracht-1b---online-magazine)
+3. [Maak een website voor echte mensen](/opdracht2)
