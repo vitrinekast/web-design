@@ -12,6 +12,7 @@ var concat = require( 'gulp-concat' );
 var browserSync = require( 'browser-sync' ).create();
 var del = require( 'del' );
 var babel = require( 'gulp-babel' );
+var compileHandlebars = require('gulp-compile-handlebars')
 
 
 function proxy() {
@@ -77,9 +78,18 @@ function clean( done ) {
 	return del( [ 'build' ] );
 }
 
+
+// handle templates
 function templates() {
-	return gulp.src( './src/templates/*.html' )
-		.pipe( gulp.dest( './build/' ) )
+	return gulp.src( './src/templates/*.handlebars' )
+        .pipe(compileHandlebars(require('./src/templates/data/index.js'), {
+			ignorePartials: true,
+			batch : ['./src/templates/partials/']
+		}))
+		.pipe(rename(function(path) {
+	        path.extname = '.html';
+	    }))
+        .pipe( gulp.dest( './build/' ) )
 		.pipe( browserSync.stream() );
 }
 
