@@ -35,10 +35,15 @@ Daarnaast zal er gebruik gemaakt worden van de volgende (mirco)libraries
 - [NoSleep.js](https://github.com/richtr/NoSleep.js?files=1) Vanilla JS library voor het actief houden van een beeldscherm (tijdens het scannen);
 
 ### Schetsen
-[WIP]
+![Mockups](mockup.png)
 
-### Verwerkte Interface design principles
+### Principles of User Interface Design.
 [WIP]
+- #11 Strong visual hierarchies work best
+- #14 Progressive disclosure
+Show only what is necessary on each screen.
+- #08 - Provide a natural next step
+- #07 Keep secondary actions secondary
 
 ### Testen
 [WIP]
