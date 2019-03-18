@@ -4,7 +4,10 @@
     "description": "//In het vak Web Design leer je hoe je interface design principles goed kan toepassen, en hoe je met behulp van een user scenario kan ontwerpen en testen.",
     "main": "index.html",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "serve": "gulp serve",
+        "run": "gulp",
+        "deploy": "firebase deploy"
     },
     "author": "",
     "license": "ISC",
@@ -17,9 +20,13 @@
         "gulp-clean": "^0.4.0",
         "gulp-clean-css": "^3.7.0",
         "gulp-concat": "^2.6.1",
+        "gulp-babel": "^8.0.0-beta.2",
         "gulp-imagemin": "^5.0.3",
         "gulp-rename": "^1.2.2",
         "gulp-sass": "^3.0.0",
+        "@babel/core": "^7.3.3",
+        "@babel/preset-env": "^7.3.1",
+        "@babel/register": "^7.0.0",
         "gulp-sourcemaps": "^2.6.0"
     }
 }
