@@ -54,14 +54,7 @@
                     <ul class='list list--cards'>
                         {{#each events}}
                             <li>
-                                <a href="/detail/{{id}}" class='card' data-navigo data-id="{{id}}">
-                                    <img src="{{img}}" alt="" class='card__img'>
-                                    <div class="card__info">
-                                        <h4>{{title}}</h4>
-                                        <p>{{date}} | {{time}}</p>
-                                        <p>{{location}}</p>
-                                    </div>
-                                </a>
+                                {{> card}}
                             </li>
                         {{/each}}
                     </ul>
@@ -74,14 +67,7 @@
                     <ul class='list list--cards'>
                         {{#each events}}
                             <li>
-                                <a href="/detail/" class='card' data-navigo>
-                                    <img src="{{img}}" alt="" class='card__img'>
-                                    <div class="card__info">
-                                        <h4>{{title}}</h4>
-                                        <p>{{date}} | {{time}}</p>
-                                        <p>{{location}}</p>
-                                    </div>
-                                </a>
+                                {{> card}}
                             </li>
                         {{/each}}
                     </ul>

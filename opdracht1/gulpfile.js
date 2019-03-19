@@ -94,7 +94,7 @@ function templates() {
 }
 
 function watch() {
-	gulp.watch( './src/js/dev/*.js', javascripts ).on( 'change', browserSync.reload );
+	gulp.watch( './src/js/dev/**/*.js', javascripts ).on( 'change', browserSync.reload );
 	gulp.watch( './src/js/libs/**/*.js', javascriptsLibs ).on( 'change', browserSync.reload );
 	gulp.watch( './src/scss/**/*.scss', styles ).on( 'change', browserSync.reload );
 	gulp.watch( './src/templates/**/*', templates ).on( 'change', browserSync.reload );

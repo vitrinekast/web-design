@@ -9,8 +9,34 @@ img {
     overflow: hidden;
     background: white;
     margin: 8px 0;
+    margin: 1rem;
+    transition: .3s ease-in;
+    transform: translate3d(0, 0, 0);
+
 
     &__info {
         padding: $gutter--sm;
     }
+
+    &__expanded {
+        // max-height: 0px;
+        // opacity: 0;
+        // padding: 0 $gutter--sm;
+        // transition: .3s ease-in;
+    }
+
+    &.active {
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0;
+
+        .card {
+
+            &__expanded {
+                // max-height:  999px;
+                // opacity: 1;
+            }
+        }
+    }
+
 }

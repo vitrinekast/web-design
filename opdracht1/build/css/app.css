@@ -109,12 +109,12 @@ a {
   text-decoration: none;
 }
 
-main {
-  padding: 0 1em 1em;
-}
-
 section + section {
   padding-top: 2em;
+}
+
+.view--active {
+  margin: 0 0;
 }
 
 .list--cards {
@@ -169,10 +169,19 @@ img {
   overflow: hidden;
   background: white;
   margin: 8px 0;
+  margin: 1rem;
+  transition: .3s ease-in;
+  transform: translate3d(0, 0, 0);
 }
 
 .card__info {
   padding: 0.5em;
+}
+
+.card.active {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
 }
 
 /*# sourceMappingURL=app.css.map */
