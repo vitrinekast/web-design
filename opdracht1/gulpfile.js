@@ -102,7 +102,7 @@ function watch() {
 }
 
 
-var build = gulp.series( clean, gulp.parallel( styles, templates, javascripts ) );
+var build = gulp.series( clean, gulp.parallel( styles, templates, javascripts, javascriptsLibs ) );
 var serve = gulp.series( clean, gulp.parallel( proxy, styles, templates, javascripts, javascriptsLibs, watch ) );
 exports.serve = serve;
 exports.build = build;

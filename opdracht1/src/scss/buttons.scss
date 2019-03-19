@@ -1,0 +1,22 @@
+.button {
+    text-decoration: none;
+    display: inline-block;
+    padding: $gutter--sm;
+    color: black;
+    margin: 0 4px;
+    border-radius: 4px;
+    font-weight: bold;
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ic + span, span + .ic {
+        padding-left: 4px;
+    }
+    span {
+        line-height: 1;
+    }
+}

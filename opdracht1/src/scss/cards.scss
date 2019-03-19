@@ -1,0 +1,16 @@
+img {
+    width: 100%;
+}
+
+.card {
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px 0 rgba(57,41,15,0.1);
+    overflow: hidden;
+    background: white;
+    margin: 8px 0;
+
+    &__info {
+        padding: $gutter--sm;
+    }
+}
