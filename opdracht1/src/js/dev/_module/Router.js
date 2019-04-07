@@ -20,14 +20,24 @@ var Router = (function () {
                     Events.openEventBasedOnParams(params);
 
                 },
+                'events/:id/finished': function (params) {
+                    window.noSleep.disable();
+                    Gif.update();
+                    
+                    document.body.setAttribute('view-active', 'finished');
+                    // open/animate the current event
+                    
+                    
+                },
                 'events/:id/:pdf': function (params) {
                     window.noSleep.enable();
                     document.body.setAttribute('view-active', 'pdf');
                     // open/animate the current event
-                    Events.openEventBasedOnParams(params);
+                    // Events.openEventBasedOnParams(params);
                     // open/animate the currently selected ticket
                     Tickets.open(params)
                 },
+                
                 '*': function (params) {
                     window.noSleep.disable();
                     document.body.removeAttribute('view-active');

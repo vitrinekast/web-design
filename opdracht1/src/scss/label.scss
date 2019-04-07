@@ -5,4 +5,10 @@
   border-radius: $border-radius;
   padding: $gutter--sm/4 $gutter--sm/2;
   text-transform: uppercase;
+  display: inline-block;
+  
+  &--lg {
+    background-color: $color__black;
+    padding: $gutter--sm $gutter--sm/2;
+  }
 }

@@ -2,9 +2,14 @@
 
 // Javascripts
 window.onload = function () {
+  if (!keys) {
+    console.error('It seems like your project is missing some keys....');
+  }
+
   window.noSleep = new NoSleep();
   Tickets.init();
   Router.init();
+  Gif.init();
 }; // identical to the data provided in the handlebars files
 // TODO update gulp task to combine these files
 
@@ -215,6 +220,9 @@ var data = {
     }]
   }
 };
+var keys = {
+  giphy: 'qPzKLrelOKaDnxQrlIxUKaiWI14bGYkW'
+};
 
 var Events = function () {
   var CARD_SELECTOR = '.fn-card';
@@ -231,7 +239,9 @@ var Events = function () {
     document.querySelectorAll(CARD_SELECTOR).forEach(function (card) {
       // find the correct card, close a card when it used to be active
       if (card.getAttribute(CARD_ID_ATTR) === params.id) {
-        open(card);
+        if (!card.classList.contains(CARD_SELECTOR_ACTIVE)) {
+          open(card);
+        }
       } else if (card.classList.contains(CARD_SELECTOR_ACTIVE)) {
         close(card);
       }
@@ -241,6 +251,7 @@ var Events = function () {
   var open = function open(elem) {
     var bounds = elem.getBoundingClientRect();
     elem.classList.add(CARD_SELECTOR_ACTIVE);
+    console.log('setting the width', bounds);
     elem.setAttribute('data-width', bounds.width); // Anime.js might be the greatest JS library since sliced bread. Powerfull + 16 kb.
     // Docs: https://animejs.com/
     // translate the card to the top of the viewport by using its current bounds
@@ -306,6 +317,43 @@ var Events = function () {
     find: find,
     openEventBasedOnParams: openEventBasedOnParams
   };
+}(); // http://api.giphy.com/v1/gifs/random?tag=party&api_key=qPzKLrelOKaDnxQrlIxUKaiWI14bGYkW
+
+
+var Gif = function () {
+  var IMG_SELECTOR = '.fn-gif';
+  var url = 'http://api.giphy.com/v1/gifs/random?tag=party&api_key=' + keys.giphy;
+  var elements = [];
+
+  var init = function init() {
+    elements = document.querySelectorAll(IMG_SELECTOR);
+    console.log(url);
+  };
+
+  var update = function update() {
+    var Http = new XMLHttpRequest();
+    Http.open("GET", url);
+    Http.send();
+
+    Http.onreadystatechange = function (e) {
+      if (!Http.responseText) {
+        return false;
+      }
+
+      var response = JSON.parse(Http.responseText);
+      console.log(response);
+      console.log(response.data.image_original_url);
+      elements.forEach(function (elem) {
+        elem.src = response.data.image_original_url;
+      });
+    }; // http://api.giphy.com/v1/gifs/random?tag=party&api_key=qPzKLrelOKaDnxQrlIxUKaiWI14bGYkW
+
+  };
+
+  return {
+    init: init,
+    update: update
+  };
 }();
 
 var Router = function () {
@@ -325,11 +373,16 @@ var Router = function () {
 
         Events.openEventBasedOnParams(params);
       },
+      'events/:id/finished': function eventsIdFinished(params) {
+        window.noSleep.disable();
+        Gif.update();
+        document.body.setAttribute('view-active', 'finished'); // open/animate the current event
+      },
       'events/:id/:pdf': function eventsIdPdf(params) {
         window.noSleep.enable();
         document.body.setAttribute('view-active', 'pdf'); // open/animate the current event
-
-        Events.openEventBasedOnParams(params); // open/animate the currently selected ticket
+        // Events.openEventBasedOnParams(params);
+        // open/animate the currently selected ticket
 
         Tickets.open(params);
       },
@@ -351,24 +404,21 @@ var Router = function () {
 var Tickets = function () {
   var FRAME_SELECTOR = '.fn-pdf-frame';
   var NAV_SELECTOR = '.fn-pdf-nav';
+  var NAV_BACK_SELECTOR = '.fn-nav-back';
   var frame;
   var nav;
+  var navBack;
 
   var init = function init() {
     // before doing anything, set up the DOM variables first
     frame = document.querySelector(FRAME_SELECTOR);
     nav = document.querySelector(NAV_SELECTOR);
+    navBack = document.querySelector(NAV_BACK_SELECTOR);
   }; // update the url of the iframe with the current ticket
 
 
   var setFrame = function setFrame(ticket) {
     frame.src = ticket.url;
-  }; // update the frame navigation based on if another ticket is available in the flow
-
-
-  var setNavigation = function setNavigation(event, ticket, text) {
-    nav.querySelector('span').textContent = text;
-    nav.href = "/events/".concat(event.id, "/").concat(ticket ? ticket.pdf : '');
   }; // find a ticket by it's name;
 
 
@@ -386,9 +436,20 @@ var Tickets = function () {
     setFrame(ticket); // if there's no next ticket available, display a final option to finish the scanning procedure.
 
     if (ticket.index < event.tickets.length - 1) {
-      setNavigation(event, event.tickets[ticket.index + 1], 'volgend ticket');
+      nav.querySelector('span').textContent = "volgend ticket (".concat(ticket.index + 1, "/").concat(event.tickets.length - 1, ")");
+      nav.href = "/events/".concat(event.id, "/").concat(event.tickets[ticket.index + 1].pdf);
+
+      if (ticket.index > 0) {
+        navBack.href = "/events/".concat(event.id, "/").concat(event.tickets[ticket.index - 1].pdf);
+      } else {
+        navBack.href = "/events/".concat(event.id);
+      }
+
+      console.log(navBack.href);
     } else {
-      setNavigation(event, false, 'klaar met scannen');
+      nav.querySelector('span').textContent = 'klaar met scannen';
+      nav.href = "/events/".concat(event.id, "/finished");
+      navBack.href = "/events/".concat(event.id, "/").concat(event.tickets[ticket.index - 1].pdf);
     }
   };
 

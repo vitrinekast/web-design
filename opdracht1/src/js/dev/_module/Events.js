@@ -13,7 +13,10 @@ var Events = (function () {
 
             // find the correct card, close a card when it used to be active
             if(card.getAttribute(CARD_ID_ATTR) === params.id) {
-                open(card);
+                
+                if(!card.classList.contains(CARD_SELECTOR_ACTIVE)) {
+                  open(card);
+                }
             } else if(card.classList.contains(CARD_SELECTOR_ACTIVE)) {
                 close(card);
             }
@@ -25,6 +28,7 @@ var Events = (function () {
         const bounds = elem.getBoundingClientRect();
 
         elem.classList.add(CARD_SELECTOR_ACTIVE);
+        console.log('setting the width', bounds)
         elem.setAttribute('data-width', bounds.width);
         // Anime.js might be the greatest JS library since sliced bread. Powerfull + 16 kb.
         // Docs: https://animejs.com/

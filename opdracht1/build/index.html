@@ -1,432 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+  <head>
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
-        <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <title>Opdracht 1</title>
+    <meta name="author" content="">
+    <meta name="description" content="">
 
-        <title>Opdracht 1</title>
-        <meta name="author" content="">
-        <meta name="description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:description" content="">
+    <meta property="og:url" content="">
 
-        <meta property="og:type" content="website">
-        <meta property="og:title" content="">
-        <meta property="og:image" content="">
-        <meta property="og:description" content="">
-        <meta property="og:url" content="">
+    <link rel="apple-touch-icon" sizes="180x180" href="">
+    <link rel="icon" type="image/png" sizes="32x32" href="">
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <link rel="mask-icon" href="" color="#000000">
 
+    <meta name="apple-mobile-web-app-title" content="">
+    <meta name="application-name" content="">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="theme-color" content="#ffffff">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/app.css">
+  </head>
+  <body>
 
-        <link rel="apple-touch-icon" sizes="180x180" href="">
-        <link rel="icon" type="image/png" sizes="32x32" href="">
-        <link rel="icon" type="image/png" sizes="16x16" href="">
-        <link rel="mask-icon" href="" color="#000000">
-
-        <meta name="apple-mobile-web-app-title" content="">
-        <meta name="application-name" content="">
-        <meta name="msapplication-TileColor" content="#000000">
-        <meta name="theme-color" content="#ffffff">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-        <link rel="stylesheet" href="./css/app.css">
-    </head>
-    <body>
-
-        <header>
-            <nav class='nav nav_main'>
+    <header>
+      <nav class='nav nav_main'>
+        <a href="#" class='nav_main__button button button--ic'>
+          <div class="button__inner">
+            <i class="ic material-icons">add</i>
+          </div>
+        </a>
+      </nav>
+      <nav class='nav nav_back'>
+        <a href="#" class='nav__button button button--ic'>
+          <div class="button__inner">
+            <i class="ic material-icons">arrow_back_ios</i>
+            <span>terug</span>
+          </div>
+        </a>
+      </nav>
+    </header>
+    <main>
+      <div class="view view_main">
+          <section>
+            <h2 class='list__title'>Vandaag</h2>
+            <p>Dit staat er vandaag voor jou op het programma:</p>
+            <ul class='list list--cards'>
+                <li class='list__item'>
                   
-                <h6 class='nav__title'>Mijn tickets</h6>
-                
-                <a href="#" class='nav_main__button button button--ic'>
-                    <div class="button__inner">
-                        <i class="ic material-icons">add</i>
+                  <div class='card__container view fn-card' data-id="0">
+                    <a class="card card--featured" href="/events/0" data-navigo >
+                      <img src="https://api.paradiso.nl/img/events/1600-beansontoast.jpg?w&#x3D;1536&amp;h&#x3D;1684&amp;fit&#x3D;crop-50-27" alt="" class='card__img'>
+                      <div class="card__info">
+                        
+                        <h3 class='card__title'>19:00: Beans on Toast and Demi Knight</h3>
+                        <div>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (2)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/0/aaa.pdf" data-navigo>aaa.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/0/1111.pdf" data-navigo>1111.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        Obscure, sultry, intense, a bit horny you could say. That&#x27;s Joost van Bellen All Night. This living legend did not end up behind the geraniums, as we say in the Netherlands, after the conclusion of the chapter RAUW. In recent months he has crammed himself into a Speedo and dived into the darkest corners of the web to find new unheard music. He oiled himself excessively and squeezed into darkest crevices of the internet and stuck his nose in the most sinister places. What did he find? 
+                      </article>
+                      
                     </div>
-                </a>
-            </nav>
-            <nav class='nav nav_back'>
-                
-                <a href="#" class='nav__button button button--ic'>
-                    <div class="button__inner">
-                        <i class="ic material-icons">arrow_back_ios</i>
-                        <span>terug</span>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/0/aaa.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <div class="card__short">
+                  <!-- <h6>In het kort:</h6> <p>Vandaag in de Melkweg, Beans on Toast and Demi Knight! De deuren gaan open om 19:00. Zorg dat je er ruim op tijd bent - dit event is uitverkocht. Veel plezier!</p> -->
+                  <a href="/events/0/" data-navigo="data-navigo" class='button button--accent'>
+                    <span>Bekijk dit event</span>
+                  </a>
+                </div>
+
+            </ul>
+          </section>
+          <section>
+            <h4 class='list__title'>Binnenkort</h4>
+
+            <ul class='list list--cards'>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="12">
+                    <a class="card" href="/events/12" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24389" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>Komodso</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (2)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/12/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/12/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        De naam van deze band hint niet voor niets naar verre streken. Het vijftal maakt namelijk naar eigen zeggen vintage exotic rock-‘n’-roll, stevig geworteld in de 50&#x27;s, 60&#x27;s en 70&#x27;s, maar extra op smaak gebracht met stijlelementen en instrumenten uit verre windstreken. Exotisch, dus. Denk aan: surfrock, woestijnblues, rumba en Indiase raga. Komodo is het geesteskind van rocker Tommy Ebben (ex-Knalland) en de muzikale nomade Gino Bombrini (ex-SKIP&amp;DIE). Beiden zingen en spelen gitaar. Janneke Nijhuis (The Deaf, The Indien) is de bassiste, Jody van Ooijen drumt en Gino’s broer Massimo speelt percussie en benadrukt daarmee nog eens extra de jungle vibe, het tribale, het ‘oergevoel’ van Komodo.
+                      </article>
+                      
                     </div>
-                </a>
-            </nav>
-        </header>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/12/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="1">
+                    <a class="card" href="/events/1" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/1/awe12ifawef.pdf" data-navigo>awe12ifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/1/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/1/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/1/9822243.pdf" data-navigo>9822243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/1/awe12ifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="2">
+                    <a class="card" href="/events/2" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/2/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/2/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/2/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/2/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/2/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="3">
+                    <a class="card" href="/events/3" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/3/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/3/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/3/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/3/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/3/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="4">
+                    <a class="card" href="/events/4" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/4/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/4/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/4/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/4/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/4/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="5">
+                    <a class="card" href="/events/5" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/5/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/5/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/5/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/5/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/5/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+                <li class='list__item'>
+                  
+                  <div class='card__container view fn-card' data-id="6">
+                    <a class="card" href="/events/6" data-navigo >
+                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
+                      <div class="card__info">
+                        <h4 class='card__title'>COI LERAY</h4>
+                        <div>
+                          <span class='card__label label'>19:00</span>
+                          <span class='card__label label'>Melkweg Upstairs</span>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="card__expanded">
+                      <article class="">
+                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+                        <h3>Mijn tickets (4)</h3>
+                        <ol>
+                            <li>
+                              <a href="/events/6/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/6/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/6/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
+                            </li>
+                            <li>
+                              <a href="/events/6/98243.pdf" data-navigo>98243.pdf</a>
+                            </li>
+                        </ol>
+                        <h3>Beschrijving</h3>
+                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
+                      </article>
+                      
+                    </div>
+                    
+                    <nav class='nav nav_event nav--bottom'>
+                      <a href="/events/6/aweifawef.pdf" data-navigo class='button button--accent'>
+                        <span>Start met tickets scannen</span>
+                      </a>
+                    </nav>
+                  </div>
+                </li>
+            </ul>
+          </section>
+      </div>
+    </main>
 
-        <main>
-            <div class="view view_main">
-                  <section>
-                      <h2 class='list__title'>Vandaag</h2>
-
-                      <ul class='list list--cards'>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="0">
-                                    <a class="card" href="/events/0" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/inspiration_view_huge/24837" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>JOOST VAN BELLEN ALL NIGHT</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (2)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/0/aaa.pdf" data-navigo>aaa.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/0/1111.pdf" data-navigo>1111.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        Obscure, sultry, intense, a bit horny you could say. That&#x27;s Joost van Bellen All Night. This living legend did not end up behind the geraniums, as we say in the Netherlands, after the conclusion of the chapter RAUW. In recent months he has crammed himself into a Speedo and dived into the darkest corners of the web to find new unheard music. He oiled himself excessively and squeezed into darkest crevices of the internet and stuck his nose in the most sinister places. What did he find? 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/0/aaa.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                      </ul>
-                  </section>
-                  <section>
-                      <h3 class='list__title'>Binnenkort</h3>
-
-                      <ul class='list list--cards'>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="12">
-                                    <a class="card" href="/events/12" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24389" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>Komodso</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (2)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/12/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/12/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        De naam van deze band hint niet voor niets naar verre streken. Het vijftal maakt namelijk naar eigen zeggen vintage exotic rock-‘n’-roll, stevig geworteld in de 50&#x27;s, 60&#x27;s en 70&#x27;s, maar extra op smaak gebracht met stijlelementen en instrumenten uit verre windstreken. Exotisch, dus. Denk aan: surfrock, woestijnblues, rumba en Indiase raga. Komodo is het geesteskind van rocker Tommy Ebben (ex-Knalland) en de muzikale nomade Gino Bombrini (ex-SKIP&amp;DIE). Beiden zingen en spelen gitaar. Janneke Nijhuis (The Deaf, The Indien) is de bassiste, Jody van Ooijen drumt en Gino’s broer Massimo speelt percussie en benadrukt daarmee nog eens extra de jungle vibe, het tribale, het ‘oergevoel’ van Komodo.
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/12/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="1">
-                                    <a class="card" href="/events/1" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/1/awe12ifawef.pdf" data-navigo>awe12ifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/1/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/1/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/1/9822243.pdf" data-navigo>9822243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/1/awe12ifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="2">
-                                    <a class="card" href="/events/2" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/2/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/2/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/2/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/2/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/2/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="3">
-                                    <a class="card" href="/events/3" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/3/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/3/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/3/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/3/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/3/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="4">
-                                    <a class="card" href="/events/4" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/4/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/4/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/4/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/4/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/4/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="5">
-                                    <a class="card" href="/events/5" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/5/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/5/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/5/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/5/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/5/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                              <li class='list__item'>
-                                  
-                                  <div class='card__container view fn-card' data-id="6">
-                                    <a class="card" href="/events/6" data-navigo >
-                                      <img src="https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/event_header/24797" alt="" class='card__img'>
-                                      <div class="card__info">
-                                        <h4 class='card__title'>COI LERAY</h4>
-                                        <div>
-                                          <span class='card__label label'>19:00</span>
-                                          <span class='card__label label'>Melkweg Upstairs</span>
-                                        </div>
-                                      </div>
-                                    </a>
-                                    <div class="card__expanded">
-                                      <article class="">
-                                        <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
-                                        <h3>Mijn tickets (4)</h3>
-                                        <ol>
-                                            <li>
-                                              <a href="/events/6/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/6/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/6/aweifawef.pdf" data-navigo>aweifawef.pdf</a>
-                                            </li>
-                                            <li>
-                                              <a href="/events/6/98243.pdf" data-navigo>98243.pdf</a>
-                                            </li>
-                                        </ol>
-                                        <h3>Beschrijving</h3>
-                                        New Jersey rapper en zangeres Coi Leray brengt haar melodieuze, hard-hitting tracks naar onze Upstairs! Na het consistent uitbrengen van tracks brak ze in 2017 door met de singles &#x27;G.A.N.&#x27; en &#x27;Pac Girl&#x27;. De twee singles creëerden niet alleen een buzz in de industrie door de harde beats, maar ook door Coi Leray&#x27;s songwriting skills en uniekheid om zowel te kunnen rappen als zingen in één track.  Haar debuutalbum &#x27; Everythingcoz&#x27; kwam in 2018 uit en bereikte binnen de korte keren al over de 150,000 plays op SoundCloud. Haar charismatische persoonlijkheid en unieke fashion sense zorgen ervoor dat fans de rising start op de voet volgen. It&#x27;s lit. 
-                                      </article>
-                                      
-                                    </div>
-                                    
-                                    <nav class='nav nav_event nav--bottom'>
-                                      <a href="/events/6/aweifawef.pdf" data-navigo class='button button--accent'>
-                                        <span>open alle tickets</span>
-                                      </a>
-                                    </nav>
-                                  </div>
-                              </li>
-                      </ul>
-                  </section>
-            </div>
-            
-            <div class="view view_pdf">
-              <iframe class='fn-pdf-frame' src="" width="" height=""></iframe>
-              <nav class='nav nav_pdf nav--bottom'>
-                <a href="/events//" data-navigo class='button button--accent  fn-pdf-nav'>
-                  <span>volgend ticket</span>
-                </a>
-              </nav>
-            </div>
-        </main>
-        
-        
-        
-        headert
-        <script type="text/javascript" src="js/libs.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/navigo@7.1.2/lib/navigo.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-    </body>
+    <div class="view view_pdf">
+      <nav class='nav nav_back_pdf'>
+        <a href="/oeps" data-navigo="data-navigo" class='nav__button button button--ic fn-nav-back'>
+          <div class="button__inner">
+            <i class="ic material-icons">arrow_back_ios</i>
+            <span>terug</span>
+          </div>
+        </a>
+      </nav>
+      <iframe class='fn-pdf-frame' src="" width="" height=""></iframe>
+      <nav class='nav nav_pdf nav--bottom'>
+        <a href="/events//" data-navigo="data-navigo" class='button button--accent  fn-pdf-nav'>
+          <span>volgend ticket</span>
+        </a>
+      </nav>
+    </div>    <div class="view view_finished">
+      <article class="t--center">
+        <h2>Yes!</h2>
+        <img src="" class="fn-gif gif" alt="">
+        <p>Het is gelukt! Heel veel plezier op het event!</p>
+        <a href="/" data-navigo="data-navigo" class='button button--white'>
+          <span>Terug naar het overzicht</span>
+        </a>
+      </article>
+    </div>    
+    <script type="text/javascript" src="js/libs.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/navigo@7.1.2/lib/navigo.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
 </html>

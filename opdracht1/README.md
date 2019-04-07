@@ -1,5 +1,29 @@
+# How-to
+
+Run this project:
+```
+npm install
+gulp serve
+```
+Build this project:
+```
+npm install
+gulp build
+
+```
+Deploy this project:
+```
+npm install
+gulp build
+npm deploy-iteration
+```
+### Dependencies:
+This project uses the Giphy API.
+Get [your own API key](https://developers.giphy.com/) and register as a `keys` object
+
+
 # Web Design
-//In het vak Web Design leer je hoe je interface design principles goed kan toepassen, en hoe je met behulp van een user scenario kan ontwerpen en testen.
+In het vak Web Design leer je hoe je interface design principles goed kan toepassen, en hoe je met behulp van een user scenario kan ontwerpen en testen.
 
 ## Opdracht 1 - Verschillende versies van een Use Case testen en demonstreren
 Voor deze opdracht gaan we leren [Interface Design Principles](http://bokardo.com/principles-of-user-interface-design/) toe te passen in een ontwerp.
@@ -79,4 +103,10 @@ Uit de test zijn de volgende punten gekomen:
 - Na het scannen van de tickets zou de gebruiker graag een "veel plezier!" scherm willen zien, omdat nu letterlijk het feestje gaat beginnen.
 
 ### Iteratie
-[WIP]
+Aan de hand van de testresultaten zijn de volgende onderdelen toegevoegd:
+- Er is meer focus op het event van vandaag gecreeerd
+- Het tijdstip is nu duidelijker zichtbaar
+- Na het scannen van een ticket is er een bedankt scherm geintroduceerd
+
+![Uitwerking](prototype_v2.png)
+De iteratie is [hier]() te bekijken

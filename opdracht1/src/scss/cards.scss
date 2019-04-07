@@ -10,17 +10,29 @@
   min-height: $card_height;
   color: $color__white;
   padding: $gutter--md $gutter--sm;
-
+  
+  &--featured {
+    min-height: $card_height*1.1;
+  }
   &:before {
     content: '';
     @extend %p--abs-stretch;
     z-index: 1;
     top: auto;
     bottom: 0;
-    height: 50%;
+    // height: 50%;
     background: $image-gradient;
   }
-
+  
+  &__short {
+    // box-shadow: $box-shadow;
+    padding: $gutter--sm 0;
+  }
+  &__top {
+    position: absolute;
+    top: $gutter--sm;
+    left: $gutter--sm;
+  }
   &__title {
     padding-bottom: $gutter--sm/2;
   }

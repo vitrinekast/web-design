@@ -4,8 +4,8 @@ module.exports = {
 		events: [
 			{
 				id: 0,
-				img: "https://s3-eu-west-1.amazonaws.com/static.melkweg.nl/uploads/images/scaled/inspiration_view_huge/24837",
-				title: "JOOST VAN BELLEN ALL NIGHT",
+				img: "https://api.paradiso.nl/img/events/1600-beansontoast.jpg?w=1536&h=1684&fit=crop-50-27",
+				title: "Beans on Toast and Demi Knight",
 				planning: "19:00 zaal open | 20:00 Komodo",
 				location: "Melkweg Upstairs",
 				time: "19:00",
@@ -13,6 +13,7 @@ module.exports = {
 				date: "Woensdag 20 maart 2019",
 				description: "Obscure, sultry, intense, a bit horny you could say. That's Joost van Bellen All Night. This living legend did not end up behind the geraniums, as we say in the Netherlands, after the conclusion of the chapter RAUW. In recent months he has crammed himself into a Speedo and dived into the darkest corners of the web to find new unheard music. He oiled himself excessively and squeezed into darkest crevices of the internet and stuck his nose in the most sinister places. What did he find? ",
 				allTickets: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+				short:"Vandaag in de Melkweg, Beans on Toast and Demi Knight! De deuren gaan open om 19:00. Zorg dat je er ruim op tijd bent - dit event is uitverkocht. Veel plezier!",
 				tickets: [
 					{
 						shared: true,
