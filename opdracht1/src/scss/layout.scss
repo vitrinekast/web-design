@@ -1,8 +1,15 @@
 main {
-    // padding: 0 $gutter--md $gutter--md;
+  padding: calc(#{$nav_main_height} + #{$gutter--md}) $gutter--md $gutter--md;
 }
 
+section + section {
+  padding-top: $gutter--lg;
+}
 
-section  + section {
-    padding-top: $gutter--lg;
+img {
+  object-fit: cover;
+}
+
+body[detail-active="true"] {
+  overflow: hidden;
 }

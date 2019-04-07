@@ -1,8 +1,17 @@
 .list {
+  &--cards {
+    list-style: none;
+    padding: 0;
+  }
 
-    &--cards {
-        list-style: none;
-        padding: 0 0;
-        padding-top: $gutter--md;
+  &__item {
+    & + & {
+      margin-top: $gutter--sm;
     }
+
+  }
+
+  &__title {
+    padding-bottom: $gutter--sm;
+  }
 }

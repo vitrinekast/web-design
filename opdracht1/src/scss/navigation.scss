@@ -1,5 +1,83 @@
 .nav {
-    display: flex;
-    justify-content: flex-end;
-    padding: $gutter--sm;
+  padding: $gutter--sm;
+  transition: $transition__base;
+
+  &_back,
+  &_main {
+    @extend %flex--center;
+    @extend %p--fixed-top;
+    height: $nav_main_height;
+  }
+
+  &_back {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+    z-index: 3;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .ic,
+    span {
+      color: $color__white;
+    }
+  }
+  
+  &_event {
+    display: none;
+  }
+
+  &_main {
+    background-color: $color__white;
+    box-shadow: $box-shadow;
+    z-index: 1;
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+
+    &__button {
+      @extend %flex--center;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      height: $nav_main_height;
+    }
+  }
+
+  &--bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+}
+
+body[view-active="event"] {
+  .nav_main {
+    transform: translate3d(0%, -100%, 0);
+    opacity: 0;
+  }
+
+  .nav_back {
+    transform: translate3d(0%, 0%, 0);
+    opacity: 1;
+  }
+
+  .nav_event {
+    display: block;
+    transform: translate3d(0%, 0%, 0);
+    opacity: 1;
+  }
+}
+
+body[view-active='pdf'] {
+  .nav_back {
+    transform: translate3d(0%, 0%, 0);
+    opacity: 1;
+  }
+
+  .nav_pdf {
+    transform: translate3d(0%, 0%, 0);
+    opacity: 1;
+  }
 }

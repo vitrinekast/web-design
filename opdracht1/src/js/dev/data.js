@@ -1,4 +1,6 @@
-module.exports = {
+// identical to the data provided in the handlebars files
+// TODO update gulp task to combine these files
+var data = {
 	today: {
 		title: "Vandaag",
 		events: [

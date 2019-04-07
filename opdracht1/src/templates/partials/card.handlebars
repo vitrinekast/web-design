@@ -1,19 +1,35 @@
-<a href="/events/{{id}}" class='card view fn-card' data-navigo data-id="{{id}}">
+
+<div class='card__container view fn-card' data-id="{{id}}">
+  <a class="card" href="/events/{{id}}" data-navigo >
     <img src="{{img}}" alt="" class='card__img'>
     <div class="card__info">
-        <h4>{{title}}</h4>
-        <p>{{date}} | {{time}}</p>
-        <p>{{location}}</p>
-
-        
+      <h4 class='card__title'>{{title}}</h4>
+      <div>
+        <span class='card__label label'>{{time}}</span>
+        <span class='card__label label'>{{location}}</span>
+      </div>
     </div>
-
-    <div class="card__expanded">
-
-        <!-- <h3>Mijn tickets (2)</h3> -->
-        <!-- <article class="">
-            {{description}}
-        </article> -->
-
-    </div>
-</a>
+  </a>
+  <div class="card__expanded">
+    <article class="">
+      <p>Dit event begint vandaag. Wees op tijd het kan druk zijn!</p>
+      <h3>Mijn tickets ({{tickets.length}})</h3>
+      <ol>
+        {{#each tickets}}
+          <li>
+            <a href="/events/{{../id}}/{{pdf}}" data-navigo>{{pdf}}</a>
+          </li>
+        {{/each}}
+      </ol>
+      <h3>Beschrijving</h3>
+      {{description}}
+    </article>
+    
+  </div>
+  
+  <nav class='nav nav_event nav--bottom'>
+    <a href="/events/{{id}}/{{tickets.0.pdf}}" data-navigo class='button button--accent'>
+      <span>open alle tickets</span>
+    </a>
+  </nav>
+</div>

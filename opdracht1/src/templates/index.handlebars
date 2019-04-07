@@ -30,51 +30,74 @@
         <meta name="theme-color" content="#ffffff">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
         <link rel="stylesheet" href="./css/app.css">
     </head>
     <body>
 
         <header>
             <nav class='nav nav_main'>
-                <a href="#" class='button button--ic'>
+                  
+                <h6 class='nav__title'>Mijn tickets</h6>
+                
+                <a href="#" class='nav_main__button button button--ic'>
                     <div class="button__inner">
                         <i class="ic material-icons">add</i>
+                    </div>
+                </a>
+            </nav>
+            <nav class='nav nav_back'>
+                
+                <a href="#" class='nav__button button button--ic'>
+                    <div class="button__inner">
+                        <i class="ic material-icons">arrow_back_ios</i>
+                        <span>terug</span>
                     </div>
                 </a>
             </nav>
         </header>
 
         <main>
-            {{#with today}}
-                <section>
-                    <h2>{{title}}</h2>
+            <div class="view view_main">
+              {{#with today}}
+                  <section>
+                      <h2 class='list__title'>{{title}}</h2>
 
-                    <ul class='list list--cards'>
-                        {{#each events}}
-                            <li>
-                                {{> card}}
-                            </li>
-                        {{/each}}
-                    </ul>
-                </section>
-            {{/with }}
-            {{#with soon}}
-                <section>
-                    <h3>{{title}}</h3>
+                      <ul class='list list--cards'>
+                          {{#each events}}
+                              <li class='list__item'>
+                                  {{> card}}
+                              </li>
+                          {{/each}}
+                      </ul>
+                  </section>
+              {{/with }}
+              {{#with soon}}
+                  <section>
+                      <h3 class='list__title'>{{title}}</h3>
 
-                    <ul class='list list--cards'>
-                        {{#each events}}
-                            <li>
-                                {{> card}}
-                            </li>
-                        {{/each}}
-                    </ul>
-                </section>
-            {{/with }}
+                      <ul class='list list--cards'>
+                          {{#each events}}
+                              <li class='list__item'>
+                                  {{> card}}
+                              </li>
+                          {{/each}}
+                      </ul>
+                  </section>
+              {{/with }}
+            </div>
+            
+            <div class="view view_pdf">
+              <iframe class='fn-pdf-frame' src="" width="" height=""></iframe>
+              <nav class='nav nav_pdf nav--bottom'>
+                <a href="/events/{{id}}/{{tickets.1.pdf}}" data-navigo class='button button--accent  fn-pdf-nav'>
+                  <span>volgend ticket</span>
+                </a>
+              </nav>
+            </div>
         </main>
-
+        
+        
+        
         {{> header}}
         <script type="text/javascript" src="js/libs.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/navigo@7.1.2/lib/navigo.min.js"></script>
