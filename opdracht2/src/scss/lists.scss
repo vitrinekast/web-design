@@ -1,0 +1,17 @@
+.list {
+  &--cards {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__item {
+    & + & {
+      margin-top: $gutter--sm;
+    }
+
+  }
+
+  &__title {
+    padding-bottom: $gutter--sm;
+  }
+}
