@@ -1,16 +1,12 @@
 .list {
-  &--cards {
-    list-style: none;
-    padding: 0;
-  }
-
   &__item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $gutter--md; 
+    padding: $gutter--md;
     margin: $gutter--md 0;
     border: 1px solid $color__black;
+
     & + & {
       margin-top: $gutter--sm;
     }

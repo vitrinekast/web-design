@@ -63,9 +63,9 @@ function javascriptsLibs() {
     return gulp.src('./src/js/libs/**/*.js')
 
         .pipe(concat('libs.js'))
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
+        // .pipe(babel({
+        //     presets: ['@babel/env']
+        // }))
         .pipe(gulp.dest('./build/js'))
         .pipe(browserSync.stream());
 }

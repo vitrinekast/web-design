@@ -1,8 +1,3 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 body {
   padding-top: 72px;
 }
@@ -12,9 +7,9 @@ main {
   padding-top: $gutter--md;
 }
 
-
-img {
-  object-fit: cover;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .layout {
@@ -33,4 +28,3 @@ img {
     }
   }
 }
-

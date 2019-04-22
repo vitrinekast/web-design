@@ -1,5 +1,3 @@
-
-
 article {
   section.fn-readme {
     position: relative;
@@ -38,8 +36,9 @@ article {
   &--code {
     position: relative;
     margin: $gutter--md 0;
+
     table {
-      white-space: pre-wrap
+      white-space: pre-wrap;
     }
 
     .hljs {
@@ -54,18 +53,20 @@ article {
     tr > td {
       padding: 8px 0;
     }
-    
+
     tr:not(.is-multi-select-parent) {
       // opacity: .2 ;
     }
-    
+
     .is-multi-select-parent {
       border-left: 2px solid $color__accent;
       border-right: 2px solid $color__accent;
-      
-      &:first-child, &-first {
+
+      &-first,
+      &:first-child {
         border-top: 2px solid $color__accent;
       }
+
       &-last {
         border-bottom: 2px solid $color__accent;
       }
@@ -81,18 +82,21 @@ article {
   // border: 2px solid red;
 }
 
-
-.hljs-ln{
+.hljs-ln {
   width: 100%;
 }
 
 .fn-review-elem .voted {
-  &, & ~ .hljs-ln-code {
+  &,
+  & ~ .hljs-ln-code {
     background-color: rgba($color__green, .1);
   }
-  &[data-vote-down], &[data-vote-down] ~ .hljs-ln-code {
+
+  &[data-vote-down],
+  &[data-vote-down] ~ .hljs-ln-code {
     background-color: rgba($color__red, .1);
   }
+
   &[data-vote-up]:before {
     border-color: blue;
     content: '🤘';
@@ -103,7 +107,6 @@ article {
     content: '🧐';
   }
 
-
   &:before {
 
     position: absolute;
@@ -111,4 +114,16 @@ article {
     font-size: 16px;
   }
 
+}
+
+
+article {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: $gutter--md;
+    margin-bottom: $gutter--sm;
+  }
 }
