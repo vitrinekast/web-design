@@ -1,0 +1,30 @@
+.section {
+  
+  &-featured {
+    padding: $gutter--lg 0;
+  }
+  
+  &-cards {
+    
+  }
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $gutter--md 0;
+  }
+  
+  &__cards {
+    display: flex;
+    margin-left: $gutter--sm*-1;
+    margin-right: $gutter--sm*-1;
+    flex-wrap: wrap;
+    
+    .section__card {
+      flex: 1 33%;
+      max-width: 34%;
+      border: $gutter--sm solid transparent;
+    }
+  }
+}

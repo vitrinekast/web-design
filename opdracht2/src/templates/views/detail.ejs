@@ -1,0 +1,45 @@
+<% var item = data %>
+<% var home = false %>
+
+@@include('./partials/card--lg.ejs')
+
+
+<div class="layout layout--detail">
+  <div class="layout--left">
+    <article class="">
+      
+      
+      <p><%- data.description %></p>
+      
+      <% if (data.github) { %>
+        <a href="#" class='button button--accent'>View the repo <%= data.github %></a>
+      <% } %>
+      
+    </article>
+
+    <section class='section-cards'>
+      <header class='section__header'>
+        <% if (data.github) { %>
+          <h3>
+            View the student work:
+          </h3>
+        <% } else { %>
+          <h3>
+            Ai.... Nothing available yet. Check another course!
+          </h3>
+        <% } %>
+        
+
+      </header>
+      <ul class='section__cards fn-forks'>
+
+      </ul>
+    </section>
+  </div>
+  
+  <div class="layout--right">
+    <aside class="">
+      
+    </aside>
+  </div>
+</div>

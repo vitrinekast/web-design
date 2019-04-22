@@ -1,0 +1,17 @@
+<header class='header'>
+  <div class="container header__container">
+    <h2 class='header__title'>
+        <a href="/" data-navigo><%= title %></a>
+    </h2>
+    <nav class='header__nav nav'>
+      <ul>
+        <% navigation.items.forEach(function(item) { %>
+        <li>
+          <a href="<%= item.url %>" class='nav__item' data-navigo>
+            <%= item.title %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </nav>
+  </div>
+</header>

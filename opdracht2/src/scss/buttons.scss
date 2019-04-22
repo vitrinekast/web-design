@@ -1,5 +1,5 @@
 .button {
-  @extend %text--bold;
+  @extend .text--bold;
   text-decoration: none;
   padding: $gutter--sm;
   color: $color__black;
@@ -9,9 +9,7 @@
 
   &--accent {
     background-color: $color__accent;
-    width: 100%;
-    display: block;
-    margin: 0;
+    margin: $gutter--md 0;
     color: $color__white;
   }
   

@@ -1,86 +1,86 @@
 .nav {
-  padding: $gutter--sm;
-  transition: $transition__base;
+  
+  &-vote {    
+    color: $color__white;
+    transition: $transition__base;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0%, 0);
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: .2;
+    pointer-events:none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
-  &_back,
-  &_back_pdf,
-  &_main {
-    @extend %flex--center;
-    @extend %p--abs-top;
-    height: $nav_main_height;
-  }
-
-  &_back, &_back_pdf {
-    opacity: 0;
-    pointer-events: none;
-    z-index: 3;
-    align-items: flex-start;
-    justify-content: flex-start;
-
-    .ic,
-    span {
+    
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $gutter--sm/4 $gutter--md;
+      background-color: lighten($color__black, 50%);
       color: $color__white;
+      text-decoration: none;
+      
+      span {
+        transition: .1s ease-in;;
+      }
+      &.animate {
+        
+        span {
+          transform: scale(1.9);
+        }
+      }
+      &:hover {
+        background-color: $color__accent;
+        color: $color__white;
+        
+      }
     }
+  }
+  ul {
+    display: flex;
   }
   
-  &_event {
-    display: none;
-  }
-
-  &_main {
-    z-index: 1;
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-
-    &__button {
-      @extend %flex--center;
+  &__item {
+    padding: $gutter--sm $gutter--md;
+    display: block;
+    position: relative;
+    
+    &:before {
+      content: '';
+      height: $gutter--sm/4;
       position: absolute;
-      right: 0;
-      height: 100%;
-      height: $nav_main_height;
+      bottom: $gutter--sm/2;
+      left: $gutter--sm;
+      background-color: $color__white;
+      width: calc(100% - #{$gutter--sm*2});
+      transform: translate3d(0, $gutter--sm, 0);
+      opacity: 0;
+      transition: $transition__base;
+    }
+    
+    
+    &:hover:before{
+      transform: translate3d(0, 0px, 0);
+      opacity: 1;
     }
   }
-
-  &--bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translate3d(0, 100%, 0);
-  }
-
 }
 
-body[view-active="event"] {
-  .nav_main {
-    transform: translate3d(0%, -100%, 0);
-    opacity: 0;
+  
+article *:focus ~ .nav-vote {
+  opacity: 1;
+  pointer-events:all;
+  
+  .nav-vote__item {
+    background-color:$color__accent;
   }
 
-  .nav_back {
-    transform: translate3d(0%, 0%, 0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .nav_event {
-    display: block;
-    pointer-events: all;
-    transform: translate3d(0%, 0%, 0);
-    opacity: 1;
-  }
-}
-
-body[view-active='pdf'] {
-  .nav_back_pdf {
-    pointer-events: all;
-    transform: translate3d(0%, 0%, 0);
-    opacity: 1;
-  }
-
-  .nav_pdf {
-    pointer-events: all;
-    transform: translate3d(0%, 0%, 0);
-    opacity: 1;
-  }
-}
+}  

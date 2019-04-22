@@ -1,0 +1,23 @@
+<ul class='section__cards'>
+  <% data.forEach(function(item) { %>
+  <li class='section__card'>
+    <a class="card" data-navigo href="<%= window.location.hash %>/<%= item.full_name %>">
+      <div class="ratio">
+        <picture class='card__img card__img--stretched'>
+          <source media="(min-width: 650px)" srcset="<%= item.owner.avatar_url %>">
+          <source media="(min-width: 465px)" srcset="<%= item.owner.avatar_url %>">
+          <img src="<%= item.owner.avatar_url %>" alt="<%= item.owner.login %>" style="width:auto;">
+        </picture>
+      </div>
+      <div class="card__info">
+        <h3 class='card__title'>
+          <%= item.owner.login %>
+        </h3>
+        <div class='card__description'>
+          <%- item.description %>
+        </div>
+      </div>
+    </a>
+  </li>
+  <% }); %>
+</ul>

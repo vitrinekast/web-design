@@ -7,10 +7,6 @@ main {
   padding: $gutter--sm*1.3 $gutter--md $gutter--md;
 }
 
-section + section {
-  padding-top: $gutter--lg;
-}
-
 img {
   object-fit: cover;
 }

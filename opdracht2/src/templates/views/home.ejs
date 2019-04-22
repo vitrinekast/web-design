@@ -1,0 +1,28 @@
+<% var home = true %>
+
+<% if (data.featured) { %>
+  <% var item = data.featured %>
+  @@include('./partials/card--lg.ejs')
+<% } %>
+
+<div class="layout layout--detail">
+  <div class="layout--left">
+    <article class="">
+      
+      <%- data.content %>
+      
+  
+      
+    </article>
+
+  </div>
+  
+  <div class="layout--right">
+    <aside class="">
+      
+    </aside>
+  </div>
+</div>
+
+<% var section = data.course %>
+@@include('./partials/section--cards.ejs')

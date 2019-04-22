@@ -1,6 +1,6 @@
 .label {
-  @extend %text--bold;
-  @extend %text--small;
+  @extend .text--bold;
+  @extend .text--small;
   background-color: $color__accent;
   border-radius: $border-radius;
   padding: $gutter--sm/4 $gutter--sm/2;

@@ -1,0 +1,27 @@
+<section class='section-featured'>
+  <div class="card card--featured ratio" href="<%= item.type + '/' + item.id %>">
+    <div class="card__inner ratio__inner">
+      
+      <% if (item.img) { %>
+        <picture class='card__img card__img--stretched'>
+          <source media="(min-width: 650px)" srcset="<%= item.img.md %>">
+          <source media="(min-width: 465px)" srcset="<%= item.img.sm %>">
+          <img src="<%= item.img.lg %>" alt="<%= item.img.alt %>" style="width:auto;">
+        </picture>
+        <% } else {  %>
+          <div class='ratio__inner media__fb'></div>
+        <% } %>
+    
+    
+      
+      <div class="card__info">
+        <h2 class='card__title'>
+          <%= item.title %>
+        </h2>
+        <h3 class='card__subtitle'>
+          <%= item.author ? item.author : item.subtitle %>
+        </h3>
+      </div>
+    </div>
+  </div>
+</section>
