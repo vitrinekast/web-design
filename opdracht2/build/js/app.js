@@ -1,510 +1,659 @@
-"use strict";
-
 // Javascripts
-window.onload = function () {
-  if (!keys) {
-    console.error('It seems like your project is missing some keys....');
-  }
 
-  Router.init();
-  Git.init();
+let ee;
+window.onload = function () {
+
+    if(!keys) {
+        console.error('It seems like your project is missing some keys....')
+    }
+    ee = new EventEmitter();
+    Router.init();
+    Git.init();
+    Navigation.init();
+    
 };
+
 
 var keys = {
-  GITHUB_CLIENT_ID: 'f9e50c4b0ccd62204fbd',
-  GITHUB_CLIENT_SECRET: '28c55d5fcd3147a7ab59b3e41d3fb758c9217699',
-  FIREBASE_PROJECT_ID: 'cmd-web-design-opdracht-2'
-};
-var data = {
-  title: 'Everything Web Share',
-  content: "<p>At the Everything Web Share platform you&#39;ll find.... Well, anything. </p>\n<p>Read more about the minor&#39;s courses, view and review the work of your peers or share any type of inspiration. So if you run into an interesting article, helpful video or just an image that looks really cool, make sure to share it here.</p>",
-  featured: {
-    img: {
-      lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-      md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-      sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-      alt: 'Table with pens'
-    },
-    title: 'Everything Web Share!',
-    url: '/courses/web-design',
-    subtitle: 'Get all your inspiration here!'
-  },
-  sections: [{
-    type: 'courses',
-    title: 'Most recent courses'
-  }],
-  course: {
-    title: 'Courses',
-    link: '/course',
-    items: [{
-      id: '0',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Web design',
-      url: '/courses/web-design',
-      description: "<p>In het vak Web design gaan we dingen ontwerpen voor echte mensen. Is er goede interactie? Kan je 'mens' je product op een prettige manier bedienen? Wat voor principes heb je gebruikt en getest? En zit er wel nonsense in?</p>",
-      github: 'web-design-1819'
-    }, {
-      id: '1',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'CSS to the Rescue',
-      url: '/courses/web-design',
-      description: "<p>In dit vak gaan we aan de slag met CSS. We gaan goed werkende responsive oplossingen bedenken \xE9n maken voor complexe interfaces. Dat is erg belangrijk, te veel ontwerpers kunnen dit niet zo goed. Het is ook belangrijk om een aantal basisprincipes achter CSS goed te begrijpen. Niet alleen op praktisch niveau, ook op experimenteel niveau. Zonder goed begrip van de basisprincipes is CSS magisch en weird. Met een goed begrip heb je CSS onder controle en kan je het laten doen wat jij wil. En dat is nodig om webpagina\u2019s vorm te geven met attention to detail. Webpagina\u2019s waar mensen blij van worden.</p>",
-      github: false
-    }, {
-      id: '2',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Browser Technologies',
-      url: '/courses/web-design',
-      description: "<p>Een van de mooiste principes van het web is dat het er echt is voor iedereen. Iedereen met een computer en een browser moet gebruik kunnen maken van het web. Het web is geen gecontroleerde (programmeer) omgeving. Je kan er gerust van uit gaan dat niemand precies hetzelfde te zien krijgt als wat jij ziet in jouw browser. Er zijn natuurlijk de technische beperkingen. Zoals - Afmetingen van de browser - Grootte van het apparaat - Manier van interactie - Kwaliteit van de hardware - Kwaliteit van het netwerk. En er zijn mensen. Allemaal verschillende mensen \u2026\n                In het vak Browser Technologies leer je hoe je goede, robuuste, toegankelijke websites maakt. Je gaat leren over Progressive Enhancement, Feature Detection en Fallback. Het web is er voor iedereen. In dit vak leer je hoe je daarvoor kan zorgen.</p>",
-      github: ''
-    }, {
-      id: '3',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Project 1 - Prototype for concept',
-      url: '/courses/web-design',
-      description: "<p>Een case waarin je gaat toepassen wat je bij de vakken Webapp from Scratch en CSS To The Rescue hebt geleerd.</p>",
-      github: ''
-    }, {
-      id: '4',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Performance Matters',
-      url: '/courses/web-design',
-      description: "<p>In het vak Performance Matters gaan we van bestaande web applicaties de performance verbeteren. We werken aan HTML, CSS en JavaScript optimalistaties en hoe we het HTTP protocol beter kunnen benutten.\n                  Onder andere de Service Worker (als onderdeel van Progressive Web Apps) wordt ingezet om de performance van applicaties te verbeteren, maar ook om offline gebruik van de applicaties mogelijk te maken.</p>",
-      github: ''
-    }, {
-      id: '5',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Project 2 - Solve & Debug',
-      url: '/courses/web-design',
-      description: "<p>Case waarin je gaat toepassen wat je bij de vakken Performance Maters en Brower technologies hebt geleerd.</p>",
-      github: ''
-    }, {
-      id: '6',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Real-Time Web',
-      url: '/courses/web-design',
-      description: "<p>In het vak Real-Time Web leer je hoe je real-time / live data op een inzichtelijke manier toegankelijk kunt maken. Terwijl je bij het vak \u2018Web of Things\u2019 leert hoe je sensor data uit \u201Cslimme\u201D devices kunt lezen en deze devices zelfs kunt aansturen, ga je bij RTW precies dit soort data real-time inzichtelijk en toegankelijk maken voor eindgebruikers.</p>",
-      github: ''
-    }, {
-      id: '7',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Web of Things',
-      url: '/courses/web-design',
-      description: "<p>WoT (Web of Things / Internet of Things) is een uitdagend nieuw veld voor de CMD'er; meer en meer diensten maken gebruik van een diversiteit aan connected devices voor een goede UX. In het vak Web of Things bouwt elke student zijn/haar eigen connected device waarmee (stand-alone of als sensornetwerk) data gegenereerd en op het web gepubliceerd kan worden, en andersom ook aangestuurd kan worden vanaf het web.</p>",
-      github: ''
-    }, {
-      id: '8',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Project 3 - Woozers Non-Existing',
-      url: '/courses/web-design',
-      description: "<p>Case waarin je gaat toepassen wat je bij de vakken Real-time web en Web of things hebt geleerd.</p>",
-      github: ''
-    }, {
-      id: '9',
-      type: 'course',
-      img: {
-        lg: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1900',
-        md: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=1200',
-        sm: 'https://images.unsplash.com/photo-1493932484895-752d1471eab5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9?q=80&w=700',
-        alt: 'Table with pens'
-      },
-      title: 'Meesterproef - Case voor een opdrachtgever',
-      url: '/courses/web-design',
-      description: "<p>In de meesterproef laten studenten zien wat ze allemaal hebben geleerd. Er worden een aantal projecten (voor echte opdrachtgevers) aangeboden waar studenten in 5 weken een oplossing voor een probleem moeten verzinnen en maken.</p>",
-      github: ''
-    }]
-  },
-  navigation: {
-    items: [{
-      title: 'Home',
-      url: '/'
-    }, {
-      title: 'Courses',
-      url: '/course'
-    }]
-  }
-};
-
-var Git = function () {
-  var BASE_USER = 'cmda-minor-web';
-  var BASE_URL = 'https://api.github.com';
-  var RAW_URL = 'https://raw.githubusercontent.com';
-  var REPOS_STR = 'repos';
-  var FORKS_STR = 'forks';
-  var FORKS_TARGET_SELECTOR = '.fn-forks';
-  var README_TARGET_SELECTOR = '.fn-readme';
-  var REPO_TARGET_SELECTOR = '.fn-repo';
-  var mdConverter;
-  var currentConfig = {};
-  var votenav;
-  var votenavUp;
-  var votenavDown;
-  var votes;
-
-  var init = function init() {
-    mdConverter = new showdown.Converter();
-  };
-
-  var getCourse = function getCourse(config) {
-    return data.course.items.find(function (item) {
-      return item.id === config.courseid;
-    });
-  };
-
-  var getForks = function getForks(config) {
-    var course = getCourse(config);
-    var url = "".concat(BASE_URL, "/").concat(REPOS_STR, "/").concat(BASE_USER, "/").concat(course.github, "/").concat(FORKS_STR, "?client_id=").concat(keys.GITHUB_CLIENT_ID, "&client_secret=").concat(keys.GITHUB_CLIENT_SECRET);
-    fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (str) {
-      Router.getPartial('list.ejs', FORKS_TARGET_SELECTOR, str);
-    });
-  };
-
-  var getReadme = function getReadme(config) {
-    var url = "".concat(RAW_URL, "/").concat(config.user, "/").concat(config.repo, "/master/README.md?client_id=").concat(keys.GITHUB_CLIENT_ID, "&client_secret=").concat(keys.GITHUB_CLIENT_SECRET);
-    currentConfig = config;
-    fetch(url).then(function (response) {
-      return response.text();
-    }).then(function (str) {
-      var html = marked(str);
-      document.querySelector(README_TARGET_SELECTOR).innerHTML = html + document.querySelector(README_TARGET_SELECTOR).innerHTML;
-      setVoteNav();
-    });
-  }; // get readme
+    GITHUB_CLIENT_ID: 'f9e50c4b0ccd62204fbd',
+    GITHUB_CLIENT_SECRET: '28c55d5fcd3147a7ab59b3e41d3fb758c9217699',
+    FIREBASE_PROJECT_ID: 'cmd-web-design-opdracht-2'
+}
 
 
-  var getRepo = function getRepo(config, cb) {
-    var course = getCourse(config);
-    var url = "".concat(BASE_URL, "/").concat(REPOS_STR, "/").concat(config.user, "/").concat(config.repo, "?client_id=").concat(keys.GITHUB_CLIENT_ID, "&client_secret=").concat(keys.GITHUB_CLIENT_SECRET);
-    fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (str) {
-      str.course = course;
-      cb(str);
-    });
-  };
+const data =  {
+    title: 'Everytssshing Web Share',
+  
+    navigation: {
+        items: [{
+                title: 'Home',
+                url: '/'
+            },
+            {
+                title: 'Up for review',
+                url: '/course'
+            },
+            // {
+            //     title: 'Cool stuff',
+            //     url: '/cool'
+            // },
+            // {
+            //     title: 'Get up here?',
+            //     url: '/contact'
+            // },
+            // {
+            //     title: 'Archive',
+            //     url: '/archive'
+            // },
+        ]
+    }
+}
 
-  var setVoteNav = function setVoteNav() {
-    votenav = document.querySelector('.nav-vote');
-    votenavUp = votenav.querySelector('.fn-vote-up');
-    votenavDown = votenav.querySelector('.fn-vote-down');
-    var contentElements = document.querySelectorAll(README_TARGET_SELECTOR + '> *');
-    var voteHeight = votenav.getBoundingClientRect().height;
-    contentElements.forEach(function (elem, index) {
-      elem.setAttribute('tabindex', 0);
-      elem.setAttribute('id', index);
-      elem.addEventListener('focus', function (e) {
-        var bounds = e.currentTarget.getBoundingClientRect();
-        var parBounds = e.currentTarget.parentNode.getBoundingClientRect();
-        var distance = Math.abs(bounds.top - parBounds.top);
-        votenav.setAttribute('data-current-index', e.currentTarget.id);
-        votenav.style.transform = "translate3d(-50%, ".concat(distance - voteHeight - 10, "px, 0)");
-      });
-    });
-    getVotes();
-    votenavUp.addEventListener('click', onVoteUp);
-    votenavDown.addEventListener('click', onVoteDown);
+var Git = (function () {
 
-    document.onkeydown = function (e) {
-      console.log(e);
-      console.log('ho');
-      var charCode = e.keyCode || e.which;
-      console.log(e.keyCode);
+    const REVIEW_ELEM_SELECTOR = '.fn-review-elem';
+    
+    let votes = [];
 
-      if (charCode === 72) {
-        onVoteUp(e);
-      }
+    var init = function () {
 
-      if (charCode === 70) {
-        onVoteDown(e);
-      }
-
-      if (e.keyCode == 37) {
-        document.querySelector("*:focus").previousElementSibling.focus();
-      }
-
-      if (e.keyCode == 38) {
-        //code for up key   
-        document.querySelector("*:focus").previousElementSibling.focus();
-      }
-
-      if (e.keyCode == 39) {
-        document.querySelector("*:focus").nextElementSibling.focus();
-      }
-
-      if (e.keyCode == 40) {
-        //code for down key
-        document.querySelector("*:focus").nextElementSibling.focus();
-      }
-    };
-
-    contentElements[0].focus();
-  };
-
-  var upTimeout = false;
-  var downTimeout = false;
-
-  var onVoteUp = function onVoteUp(e) {
-    e.preventDefault();
-    console.log('up');
-    votenavUp.classList.add('animate');
-    upTimeout = window.setTimeout(function () {
-      return votenavUp.classList.remove('animate');
-    }, 100);
-    console.log(upTimeout);
-    castVote(votenav.getAttribute('data-current-index'), 'up');
-  };
-
-  var onVoteDown = function onVoteDown(e) {
-    e.preventDefault();
-    votenavDown.classList.add('animate');
-    downTimeout = window.setTimeout(function () {
-      return votenavDown.classList.remove('animate');
-    }, 100);
-    castVote(votenav.getAttribute('data-current-index'), 'down');
-  };
-
-  var displayVotes = function displayVotes() {
-    var contentElements = document.querySelectorAll(README_TARGET_SELECTOR + '> *');
-    console.log('about to display the votes', votes);
-
-    if (!votes) {
-      return false;
     }
 
-    for (var property in votes) {
-      if (votes.hasOwnProperty(property)) {
-        // Do things here
-        if (votes[property]) {
-          contentElements[votes[property].id].setAttribute('data-vote-up', votes[property].up);
-          contentElements[votes[property].id].setAttribute('data-vote-down', votes[property].down);
-        }
-      }
+    var getCurrentFile = function (data) {
+        return data.files.find((item) => {
+            return item.id === parseInt(data.params.fileid)
+        })
+
     }
-  };
+    var displayVotes = function (params) {
+      const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes.json`;
+      
+      fetch(url)
+          .then(res => res.json())
+          .then(function (response) {
+              
+              votes = response ? response : []
+              
+              if(!response) {
+                return false
+              }
+              
+              response.forEach((vote) => {
+                if(vote) {
+                  let targetElement = document.querySelector(`.hljs-ln-numbers[data-line-number="${vote.id}"]`);
+                  if(vote.up > 0) {
+                    targetElement.setAttribute('data-vote-up', vote.up)
+                  }
+                  if(vote.down > 0) {
+                    targetElement.setAttribute('data-vote-down', vote.down)
+                  }
+                  
+                  targetElement.classList.add('voted')
+                }
+              })
+            
+          })
+          .catch(error => console.error('Error:', error));
+    }
+    
+    var castVote = function (id, direction) {
+      id = parseInt(id);
+      
+      let currentVote;
+   
+       if(!votes[id]) {
+           currentVote = {
+               id: id,
+               up: 0,
+               down: 0
+           }
+       } else {
+           currentVote = votes[id]
+       }
+       currentVote[direction]++;
+       
+       let params = router.lastRouteResolved().params;
+   
+       const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes/${id}.json`;
+       
+       fetch(url, {
+               method: 'PUT', // or 'PUT'
+               body: JSON.stringify(currentVote), // data can be `string` or {object}!
+               headers: {
+                   'Content-Type': 'application/json'
+               }
+           }).then(res => res.json())
+           .then(function (response) {
+               
+               displayVotes(params);
+               
+           })
+           .catch(error => console.error('Error:', error));
+    }
+    
+    var displayCode = function (data) {
+      
+        let currentFile = getCurrentFile(data);
+        let reviewElement = document.querySelector(REVIEW_ELEM_SELECTOR);
+        let url = `${currentFile.url}?client_id=${keys.GITHUB_CLIENT_ID}&client_secret=${keys.GITHUB_CLIENT_SECRET}`;
 
-  var castVote = function castVote(index, vote) {
-    index = parseInt(index);
-    var currentVote;
+        fetch(url)
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (str) {
+              
+              let codeContent;
+              console.log({currentFile})
+              if(currentFile.type === 'css') {
+                codeContent = css_beautify(str, { indent_size: 2, space_in_empty_paren: true });
+              } else if(currentFile.type === 'javascript') {
+                 codeContent = js_beautify(str, { indent_size: 2, space_in_empty_paren: true });
+              }  else if(currentFile.type === 'markdown') {
+                // codeContent = marked(str)
+                codeContent = str
+              } else {
+                codeContent = str
+              }
+                
+                reviewElement.innerHTML = codeContent;
+                hljs.highlightBlock(reviewElement);
+                hljs.lineNumbersBlock(reviewElement);
+                displayVotes(data.params);
 
-    if (!votes[index]) {
-      currentVote = {
-        id: index,
-        up: 0,
-        down: 0
-      };
-    } else {
-      currentVote = votes[index];
+                window.setTimeout(function () {
+                    ee.emitEvent('created-partial-code');
+                }, 50)
+
+
+            })
+    }
+    
+    var finishReview = function (params) {
+      
+      Api.updateReviewedFile(params)
     }
 
-    currentVote[vote]++;
-    var url = "https://".concat(keys.FIREBASE_PROJECT_ID, ".firebaseio.com/").concat(currentConfig.user, "/").concat(currentConfig.repo, "/votes/").concat(index, ".json");
-    fetch(url, {
-      method: 'PUT',
-      // or 'PUT'
-      body: JSON.stringify(currentVote),
-      // data can be `string` or {object}!
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function (res) {
-      return res.json();
-    }).then(function (response) {
-      console.log('Success:', JSON.stringify(response));
-      getVotes();
-    })["catch"](function (error) {
-      return console.error('Error:', error);
-    });
-  };
 
-  var getVotes = function getVotes() {
-    var url = "https://".concat(keys.FIREBASE_PROJECT_ID, ".firebaseio.com/").concat(currentConfig.user, "/").concat(currentConfig.repo, "/votes.json");
-    console.log(url);
-    fetch(url).then(function (response) {
-      return response.json();
-    })["catch"](function (error) {
-      return console.error('Error:', error);
-    }).then(function (str) {
-      console.log('getVotes', str);
+    return {
+        init: init,
+        displayCode: displayCode,
+        castVote: castVote,
+        finishReview: finishReview
+    }
+})();
 
-      if (!str) {
-        str = [];
-      }
-
-      votes = str;
-      displayVotes();
-    });
-  };
-
-  return {
-    init: init,
-    getForks: getForks,
-    getRepo: getRepo,
-    getReadme: getReadme
-  };
-}();
-
-var Router = function () {
-  var APP_SELECTOR = '.fn-app';
-  var appContainer;
-  var router;
-
-  var init = function init() {
-    // setup the navigo router
-    // Navigo Router is a simple vanilla JS micro router 
-    // Docs / source: https://github.com/krasimir/navigo
-    var routeRoot = null;
-    var useHash = true;
-    var hash = '#!';
-    router = new Navigo(routeRoot, useHash, hash);
-    appContainer = document.querySelector(APP_SELECTOR); // set the view attribute on the body so the styling can display the correct views
-
-    router.on({
-      ':category': function category(params) {
-        getView('courses.ejs', params);
-        window.scrollTo(0, 0);
-      },
-      ':category/:courseid': function categoryCourseid(params) {
-        getView('detail.ejs', params);
-        Git.getForks(params);
-        window.scrollTo(0, 0);
-      },
-      'course/:courseid/:user/:repo': function courseCourseidUserRepo(params) {
-        Git.getRepo(params, function (apiData) {
-          getView('work.ejs', params, apiData);
-          Git.getReadme(params);
+  var Navigation = (function () {
+  let votenav;
+  let votenavUp;
+  let votenavDown;
+  let voteHeight;
+  
+    var init = function () {
+        SpatialNavigation.init();
+        SpatialNavigation.add({
+            selector: 'a, .focusable, .hljs-ln-n'
         });
-        window.scrollTo(0, 0);
-      },
-      'cool': function cool(params) {
-        getView('cool.ejs', {});
-        window.scrollTo(0, 0);
-      },
-      '*': function _(params) {
-        getView('home.ejs', {});
-        window.scrollTo(0, 0);
-      }
-    }).resolve();
-  };
 
-  var createView = function createView(str, params) {
-    if (!params) {
-      params = {};
     }
 
-    var subdata = data;
+    var update = function () {
+        document.querySelectorAll('.hljs-ln-n').forEach((elem) => {
+            elem.setAttribute('tabindex', '0')
+        })
+        SpatialNavigation.makeFocusable();
 
-    if (params.category) {
-      subdata = subdata[params.category];
     }
 
-    if (params.courseid) {
-      subdata = subdata.items.find(function (item) {
-        return item.id === params.courseid;
-      });
+
+    const MULTI_SELECT_CLASS = 'is-multi-select';
+    const MULTI_SELECT_PARENT_CLASS = 'is-multi-select-parent';
+    
+    const MULTI_SELECT_SELECTOR = '.' + MULTI_SELECT_CLASS;
+    const MULTI_SELECT_PARENT_SELECTOR = '.' + MULTI_SELECT_PARENT_CLASS;
+    
+    var setMultiSelectElement = function (elem) {
+        const activeEl = document.activeElement;
+        const activeRow = document.activeElement.parentNode.parentNode;
+        if(activeRow) {
+          activeRow.classList.add(MULTI_SELECT_PARENT_CLASS)
+          if(!document.querySelectorAll(MULTI_SELECT_PARENT_SELECTOR + '-first').length) {
+              activeRow.classList.add(MULTI_SELECT_PARENT_CLASS + '-first')
+          }
+
+          if(document.querySelector(MULTI_SELECT_PARENT_SELECTOR + '-last')) {
+              document.querySelector(MULTI_SELECT_PARENT_SELECTOR + '-last').classList.remove(MULTI_SELECT_PARENT_CLASS + '-last')
+          }
+          
+          activeRow.classList.add(MULTI_SELECT_PARENT_CLASS + '-last')
+        }
+
+        activeEl.classList.add(MULTI_SELECT_CLASS)
+        
+
+        
+    }
+    
+    var removeClass = function (className) {
+      document.querySelectorAll('.' + className).forEach((elem) => {
+          elem.classList.remove(className)
+      })
+    }
+    
+    var clearSelection = function () {
+      removeClass(MULTI_SELECT_CLASS);
+      removeClass(MULTI_SELECT_PARENT_CLASS);
+      removeClass(MULTI_SELECT_PARENT_CLASS + '-last');
+      removeClass(MULTI_SELECT_PARENT_CLASS + '-first');
+    }
+    
+    var multiSelect = function () {
+        let selection = [];
+        let isMulti = false;
+        SpatialNavigation.pause();
+        // Mousetrap.bind('shift+down', function (e) {
+        //     setMultiSelectElement(document.activeElement);
+        //     SpatialNavigation.move('down');
+        // });
+        Mousetrap.bind('shift+down', function (e) {
+            
+            if(!isMulti) {
+              clearSelection();
+            }
+            setMultiSelectElement(document.activeElement);
+            SpatialNavigation.move('down');
+            setMultiSelectElement(document.activeElement);
+            isMulti = true;
+        });
+        Mousetrap.bind('shift+up', function (e) {
+            
+            if(!isMulti) {
+              clearSelection();
+            }
+            setMultiSelectElement(document.activeElement);
+            SpatialNavigation.move('up');
+            setMultiSelectElement(document.activeElement);
+            isMulti = true;
+        });
+        Mousetrap.bind('down', function (e) {
+            clearSelection();
+            SpatialNavigation.move('down');
+            moveVoteNav(document.activeElement);
+            setMultiSelectElement(document.activeElement)
+            isMulti = false;
+        });
+        Mousetrap.bind('up', function (e) {
+          clearSelection();
+            SpatialNavigation.move('up');
+            moveVoteNav(document.activeElement);
+            setMultiSelectElement(document.activeElement)
+        });
+      
+    }
+    
+    var moveVoteNav = function (targetEl) {
+        const bounds = targetEl.getBoundingClientRect();
+        
+        const parBounds = document.querySelector('.fn-review-elem').getBoundingClientRect();
+        var distance = Math.abs(bounds.top - parBounds.top );
+        votenav.setAttribute('data-current-index', targetEl.getAttribute('data-line-number'));
+        votenav.style.transform = `translate3d(0%, ${distance - 10}px, 0)`;
+    }
+    
+    var castVote = function (vote, type) {
+      
+      document.querySelectorAll('.is-multi-select').forEach((item) => {
+          Git.castVote(item.getAttribute('data-line-number'), type)
+      })
+      
+    }
+    
+    
+    
+    var vote = function () {
+        votenav = document.querySelector('.nav-vote');
+        votenavUp = votenav.querySelector('.fn-vote-up');
+        votenavDown = votenav.querySelector('.fn-vote-down');
+        voteHeight = votenav.getBoundingClientRect().height;
+        
+        let upTimeout;
+        
+        Mousetrap.bind('h', function (e) {
+            votenavUp.classList.add('animate');
+            upTimeout = window.setTimeout(() => votenavUp.classList.remove('animate'), 100);
+            castVote(votenav.getAttribute('data-current-index'), 'up');
+        });
+        Mousetrap.bind('f', function (e) {
+            votenavDown.classList.add('animate');
+            upTimeout = window.setTimeout(() => votenavDown.classList.remove('animate'), 100);
+            castVote(votenav.getAttribute('data-current-index'), 'down');
+        });
+         
+         
+         document.querySelectorAll('.hljs-ln-n').forEach((elem) => {
+           elem.addEventListener('focus', function (e) {
+             moveVoteNav(e.currentTarget)
+           });
+         })
+  
     }
 
-    parseViewData(str, subdata);
-  };
+    return {
+        init: init,
+        update: update,
+        multiSelect: multiSelect,
+        vote: vote
+    }
+})();
 
-  var parseViewData = function parseViewData(str, subdata) {
-    var template = ejs.compile(str, {});
-    var html = ejs.render(str, {
-      data: subdata
-    }, {});
-    appContainer.innerHTML = html;
-    router.updatePageLinks();
-  };
+let router;
 
-  var getView = function getView(url, params, apiData) {
-    fetch(url).then(function (response) {
-      return response.text();
-    }).then(function (str) {
-      if (apiData) {
-        parseViewData(str, apiData);
-      } else {
-        createView(str, params, data);
-      }
-    });
-  };
+var Router = (function () {
+    const APP_SELECTOR = '.fn-app';
 
-  var getPartial = function getPartial(url, selector, apiData) {
-    fetch(url).then(function (response) {
-      return response.text();
-    })["catch"](function (error) {
-      return console.error('Error:', error);
-    }).then(function (str) {
-      if (apiData.message === 'Not Found') {
-        return false;
-      }
+    let appContainer;
+    
 
-      var template = ejs.compile(str, {});
-      var html = ejs.render(str, {
-        data: apiData
-      }, {});
-      document.querySelector(selector).innerHTML = html;
-      router.updatePageLinks();
-    });
-  };
+    const CREATED_VIEW_E = 'created-view';
 
-  return {
-    init: init,
-    getView: getView,
-    getPartial: getPartial
-  };
-}();
+    var init = function () {
+        // setup the navigo router
+        // Navigo Router is a simple vanilla JS micro router 
+        // Docs / source: https://github.com/krasimir/navigo
+        var routeRoot = null;
+        var useHash = true;
+        var hash = '#!';
+        router = new Navigo(routeRoot, useHash, hash);
+        appContainer = document.querySelector(APP_SELECTOR);
+        // set the view attribute on the body so the styling can display the correct views
+
+        router
+            .on({
+                'review/:reviewid/:fileid/finish': function (params) {
+                  Git.finishReview(params);
+                  router.navigate(`/review/${params.reviewid}/${parseInt(params.fileid) + 1}`);
+                },
+                'review/:reviewid/:fileid': function (params) {
+                    
+                    getView('review.ejs', params);
+                    onUpdatePage();
+
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        // Git.displayCode(params);
+                        Api.displayPartial('file', params);
+                        
+                    });
+                    
+                    ee.addOnceListener('created-partial-code', function (e) {
+                        
+                        Navigation.update();
+                        Navigation.multiSelect();
+                        Navigation.vote();
+                    });
+                    
+
+                },
+                'review/thanks': function (params) {
+                    getView('thanks.ejs', params);
+                    onUpdatePage();
+
+                },
+                'review/:reviewid': function (params) {
+                    getView('review.ejs', params);
+                    onUpdatePage();
+
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        // Git.displayCode(params);
+                        Api.displayPartial('file', params);
+                        
+                    });
+                    
+                    ee.addOnceListener('created-partial-code', function (e) {
+                        
+                        Navigation.update();
+                        Navigation.multiSelect();
+                        Navigation.vote();
+                    });
+                },
+                
+
+                '*': function (params) {
+                    getView('home.ejs', {});
+                    onUpdatePage();
+                    
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        Api.displayPartial('review', params);
+                    });
+                    
+                    ee.addOnceListener('created-partial', function (e) {
+                        
+                        Navigation.update();
+                        router.updatePageLinks();
+                    });
+
+
+
+                }
+            })
+            .resolve();
+    }
+
+    var onUpdatePage = function (params) {
+        ee.addOnceListener(CREATED_VIEW_E, function (e) {
+            router.updatePageLinks();
+            window.scrollTo(0, 0);
+            Navigation.update();
+        });
+    }
+    var getSubData = function (str, params) {
+        if(!params) { params = {} }
+
+          // let subdata = data;
+          return data
+        // 
+        // if(params.category) {
+        //     subdata = subdata[params.category];
+        // }
+        // 
+        // if(params.courseid) {
+        //     subdata = subdata.items.find((item) => {
+        //         return item.id === params.courseid
+        //     })
+        // }
+        // if(params.reviewid) {
+        //     subdata = subdata.review.find((item) => {
+        //         return item.id === parseInt(params.reviewid)
+        //     })
+        // }
+      
+        return subdata
+
+    }
+
+
+    var getView = function (url, params, apiData) {
+
+        fetch(url)
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (str) {
+                if(!apiData) {
+                    apiData = getSubData(str, params);
+                }
+
+                let template = ejs.compile(str, {});
+
+                let html = ejs.render(str, { data: apiData }, {});
+                appContainer.innerHTML = html;
+
+                ee.emitEvent(CREATED_VIEW_E, ['url']);
+            })
+    }
+
+    // var getPartial = function (url, selector, apiData) {
+    //     fetch(url)
+    //         .then(function (response) {
+    //             return response.text();
+    //         })
+    //         .catch(error => console.error('Error:', error))
+    //         .then(function (str) {
+    //             if(apiData.message === 'Not Found') { return false }
+    //             let template = ejs.compile(str, {});
+    // 
+    //             let html = ejs.render(str, { data: apiData }, {});
+    //             document.querySelector(selector).innerHTML = html
+    //             router.updatePageLinks();
+    //             Navigation.update();
+    //         })
+    // }
+    return {
+        init: init,
+        getView: getView,
+        // getPartial: getPartial
+    }
+})();
+
+var Api = (function () {
+    var init = function () {
+
+    }
+
+    var mergePartialWithData = function (params, url, templateUrl, eventName, selector, cb) {
+        
+        let combineTemplateWithData = function (templateString, apiData) {
+            let template = ejs.compile(templateString, {});
+            let html = ejs.render(templateString, { data: apiData }, {});
+            
+            document.querySelector(selector).innerHTML = html;
+            
+            ee.emitEvent('created-partial', [name]);
+            
+            if(cb) {
+              cb(apiData);
+            }
+            
+        }
+
+        fetch(templateUrl)
+            .then((templateResponse) => {
+                return templateResponse.text();
+            })
+            .then((templateResponse) => {
+                fetch(url)
+                    .then((apiResponse) => {
+                        return apiResponse.json();
+                    })
+                    .then((apiResponse) => {
+                        apiResponse.params = params
+                        combineTemplateWithData(templateResponse, apiResponse);
+                    })
+            })
+    }
+
+    var displayPartial = function (name, params) {
+
+        if(name == 'review') {
+            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/${name}.json`;
+            const templateUrl = 'list-review.ejs';
+            mergePartialWithData(params, url, templateUrl, 'created-partial', '.fn-list-review');
+        }
+        if(name == 'file') {
+            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
+            const templateUrl = 'data-file.ejs';
+            mergePartialWithData(params, url, templateUrl, 'created-partial', '.fn-api-file', function (data) {
+              Git.displayCode(data)
+            });
+
+        }
+
+    }
+
+    var updateReviewedFile = function (params) {
+        let url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files.json`;
+        
+        let files;
+
+        fetch(url)
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                
+                let first = response.find((item) => {
+                    return !item.reviewed;
+                })
+                first.reviewed = true;
+                const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${first.id}.json`;
+                fetch(url, {
+                        method: 'PUT', // or 'PUT'
+                        body: JSON.stringify(first), // data can be `string` or {object}!
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.json())
+                    .then(function (response) {
+                        
+
+
+                    })
+                    .catch(error => console.error('Error:', error));
+            })
+
+        // fetch(url, {
+        //         method: 'PUT', // or 'PUT'
+        //         body: JSON.stringify(currentVote), // data can be `string` or {object}!
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     }).then(res => res.json())
+        //     .then(function (response) {
+        //         
+        //         displayVotes(params);
+        // 
+        //     })
+        //     .catch(error => console.error('Error:', error));
+    }
+
+
+    // var displayPartial = function (name) {
+    //     if(name == 'review') {
+    //         
+    // 
+    //         const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/${name}.json`;
+    //         const templateUrl = 'list-review.ejs';
+    // 
+    //         fetch(templateUrl)
+    //             .then(function (response) {
+    //                 return response.text();
+    //             })
+    //             .then(getApiData)
+    //             .then(function (htmlString) {
+    //                 fetch(url)
+    //                     .then(function (response) {
+    //                         return response.json();
+    //                     })
+    //                     .catch(error => console.error('Error:', error))
+    //                     .then(function (apiData) {
+    //                         
+    //                         let template = ejs.compile(htmlString, {});
+    // 
+    //                         let html = ejs.render(htmlString, { data: apiData }, {});
+    //                         document.querySelector('.fn-list-review').innerHTML = html;
+    //                         ee.emitEvent('created-partial', [name]);
+    //                     })
+    //             })
+    // 
+    // 
+    // 
+    //     }
+
+
+    // }
+
+    return {
+        init: init,
+        displayPartial: displayPartial,
+        updateReviewedFile: updateReviewedFile
+    }
+})();

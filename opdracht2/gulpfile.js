@@ -51,10 +51,10 @@ function styles() {
 function javascripts() {
     return gulp.src('./src/js/dev/**/*.js')
         .pipe(concat('app.js'))
-        .pipe(babel({
-            presets: ['@babel/env'],
+        // .pipe(babel({
+            // presets: ['@babel/env'],
             // sourceType: "module"
-        }))
+        // }))
         .pipe(gulp.dest('./build/js'))
         .pipe(browserSync.stream());
 }
@@ -132,10 +132,11 @@ function data() {
 
 function watch() {
     gulp.watch('./src/js/dev/**/*.js', javascripts).on('change', browserSync.reload);
+    gulp.watch('./src/js/dev/**/*.js', templates).on('change', browserSync.reload);
+    gulp.watch('./src/js/dev/**/*.js', views).on('change', browserSync.reload);
     gulp.watch('./src/js/libs/**/*.js', javascriptsLibs).on('change', browserSync.reload);
     gulp.watch('./src/scss/**/*.scss', styles).on('change', browserSync.reload);
     gulp.watch('./src/templates/**/*', templates).on('change', browserSync.reload);
-
     gulp.watch('./src/templates/**/*', views).on('change', browserSync.reload);
     gulp.watch('./src/data/**/*', data).on('change', browserSync.reload);
     gulp.watch('./src/assets/**/*', assets).on('change', browserSync.reload);

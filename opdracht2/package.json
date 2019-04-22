@@ -34,6 +34,7 @@
         "gulp-sourcemaps": "^2.6.0"
     },
     "dependencies": {
-        "@postlight/mercury-parser": "^2.1.0"
+        "@postlight/mercury-parser": "^2.1.0",
+        "gulp-unused": "^0.2.1"
     }
 }

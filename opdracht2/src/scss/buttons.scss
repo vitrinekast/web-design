@@ -13,11 +13,22 @@
     color: $color__white;
   }
   
+  &--green {
+    background-color: $color__green;
+    margin: $gutter--md 0;
+    color: $color__white;
+  }
+  
   &--white {
     background-color: $color__white;
     color: $color__accent;
     width: 100%;
     display: block;
+  }
+  
+  &--lg {
+    font-size: 1em;
+    padding: $gutter--lg $gutter--lg;
   }
 
   &__inner {

@@ -1,28 +1,9 @@
 <% var home = true %>
+<h2>Up for review</h2>
 
-<% if (data.featured) { %>
-  <% var item = data.featured %>
-  @@include('./partials/card--lg.ejs')
-<% } %>
-
-<div class="layout layout--detail">
-  <div class="layout--left">
-    <article class="">
-      
-      <%- data.content %>
-      
+<ul class='list list--wide fn-list-review'>
   
-      
-    </article>
+</ul>
 
-  </div>
-  
-  <div class="layout--right">
-    <aside class="">
-      
-    </aside>
-  </div>
-</div>
 
-<% var section = data.course %>
-@@include('./partials/section--cards.ejs')
+

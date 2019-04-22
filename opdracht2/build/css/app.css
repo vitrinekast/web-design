@@ -3,7 +3,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css?family=Fira+Mono");
+@import url("https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -100,6 +100,215 @@ table {
   height: 100%;
 }
 
+/* PrismJS 1.16.0
+https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+arff+markup-templating+ejs+handlebars+php+json+scss+sass+pug&plugins=line-highlight+line-numbers */
+/**
+ * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/chriskempson/tomorrow-theme
+ * @author Rose Pritchard
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #2d2d2d;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  color: #e2777a;
+}
+
+.token.function-name {
+  color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+  color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  color: green;
+}
+
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  /* Same as .prism’s padding-top */
+  background: rgba(153, 122, 102, 0.08);
+  background: linear-gradient(to right, rgba(153, 122, 102, 0.1) 70%, rgba(153, 122, 102, 0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+.line-highlight:before,
+.line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: rgba(153, 122, 102, 0.4);
+  color: #f5f2f0;
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+.line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}
+
+.line-numbers .line-highlight:before,
+.line-numbers .line-highlight:after {
+  content: none;
+}
+
+pre[class*="language-"].line-numbers {
+  position: relative;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
+}
+
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em;
+  /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.line-numbers-rows > span {
+  pointer-events: none;
+  display: block;
+  counter-increment: linenumber;
+}
+
+.line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #999;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+}
+
 html {
   font-size: 16px;
 }
@@ -173,6 +382,11 @@ a:hover {
   color: tomato;
 }
 
+.link, article a {
+  color: tomato;
+  text-decoration: underline;
+}
+
 article h1,
 article h2,
 article h3,
@@ -193,26 +407,6 @@ body {
 
 main {
   padding-top: 1em;
-}
-
-.header {
-  background-color: black;
-  color: white;
-  padding: 1em 0;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-
-.header__container {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 img {
@@ -236,28 +430,6 @@ img {
   -ms-flex: 3 30%;
   flex: 3 30%;
   border-left: 0.5em solid transparent;
-}
-
-.fn-readme > *[data-vote-up]:before {
-  border-color: blue;
-  content: "🤘" attr(data-vote-up);
-}
-
-.fn-readme > *[data-vote-down]:before {
-  border-color: blue;
-  content: "🧐" attr(data-vote-down);
-}
-
-.fn-readme > *[data-vote-down][data-vote-down]:before {
-  border-color: blue;
-  content: "🤘" attr(data-vote-up) " 🧐" attr(data-vote-down);
-}
-
-.fn-readme > *:before {
-  position: absolute;
-  left: -5em;
-  font-size: 16px;
-  transform: translate3d(0, 10px, 0);
 }
 
 .view_base, .view_finished, .view_pdf {
@@ -306,6 +478,18 @@ body[view-active="finished"] .view_finished {
   padding: 0;
 }
 
+.list__item {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1em;
+  margin: 1em 0;
+  border: 1px solid black;
+}
+
 .list__item + .list__item {
   margin-top: 0.5em;
 }
@@ -319,8 +503,8 @@ body[view-active="finished"] .view_finished {
   transition: 0.3s ease-in;
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0%, 0);
+  left: 100%;
+  transform: translate3d(0%, 0%, 0);
   display: inline-block;
   display: -ms-flexbox;
   display: flex;
@@ -402,6 +586,34 @@ article *:focus ~ .nav-vote .nav-vote__item {
   background-color: tomato;
 }
 
+.header {
+  background-color: black;
+  color: white;
+  padding: 1em 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.header__container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header-review {
+  margin: 2em 0;
+}
+
+.header__title {
+  margin-bottom: 0.5em;
+}
+
 .section-featured {
   padding: 2em 0;
 }
@@ -432,17 +644,24 @@ article *:focus ~ .nav-vote .nav-vote__item {
   border: 0.5em solid transparent;
 }
 
+.footer {
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: 2em 1em;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 article section.fn-readme {
   position: relative;
   padding-top: 50px;
 }
 
-article a {
-  color: tomato;
-  text-decoration: underline;
-}
-
-article ul, article ol {
+article ol,
+article ul {
   list-style: unset;
   padding-left: 1.5em;
 }
@@ -455,12 +674,81 @@ article table tr:nth-of-type(odd) {
   background-color: #f2f2f2;
 }
 
-article table th, article table td {
+article table td,
+article table th {
   padding: 0.25em 0.5em 0.25em 0;
 }
 
-article table th:first-of-type, article table td:first-of-type {
+article table td:first-of-type,
+article table th:first-of-type {
   padding-left: 0.25em;
+}
+
+.article--code {
+  position: relative;
+  margin: 1em 0;
+}
+
+.article--code table {
+  white-space: pre-wrap;
+}
+
+.article--code .hljs {
+  background-color: transparent;
+}
+
+.article--code .hljs-ln-n {
+  padding: 0 1em;
+  font-weight: lighter;
+}
+
+.article--code tr > td {
+  padding: 8px 0;
+}
+
+.article--code .is-multi-select-parent {
+  border-left: 2px solid tomato;
+  border-right: 2px solid tomato;
+}
+
+.article--code .is-multi-select-parent:first-child, .article--code .is-multi-select-parent-first {
+  border-top: 2px solid tomato;
+}
+
+.article--code .is-multi-select-parent-last {
+  border-bottom: 2px solid tomato;
+}
+
+.article--code tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.hljs-ln {
+  width: 100%;
+}
+
+.fn-review-elem .voted, .fn-review-elem .voted ~ .hljs-ln-code {
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.fn-review-elem .voted[data-vote-down], .fn-review-elem .voted[data-vote-down] ~ .hljs-ln-code {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.fn-review-elem .voted[data-vote-up]:before {
+  border-color: blue;
+  content: '🤘';
+}
+
+.fn-review-elem .voted[data-vote-down]:before {
+  border-color: blue;
+  content: '🧐';
+}
+
+.fn-review-elem .voted:before {
+  position: absolute;
+  left: -5em;
+  font-size: 16px;
 }
 
 .button {
@@ -478,11 +766,22 @@ article table th:first-of-type, article table td:first-of-type {
   color: white;
 }
 
+.button--green {
+  background-color: green;
+  margin: 1em 0;
+  color: white;
+}
+
 .button--white {
   background-color: white;
   color: tomato;
   width: 100%;
   display: block;
+}
+
+.button--lg {
+  font-size: 1em;
+  padding: 2em 2em;
 }
 
 .button .ic + span,
@@ -573,6 +872,10 @@ article table th:first-of-type, article table td:first-of-type {
   padding: 1em 0;
 }
 
+.progress {
+  width: 100%;
+}
+
 .label {
   background-color: tomato;
   border-radius: 4px;
@@ -584,6 +887,10 @@ article table th:first-of-type, article table td:first-of-type {
 .label--lg {
   background-color: black;
   padding: 0.5em 0.25em;
+}
+
+.icon--lg {
+  font-size: 3em;
 }
 
 iframe {

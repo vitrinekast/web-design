@@ -1,0 +1,10 @@
+.footer {
+  // position: fixed; 
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: $gutter--lg $gutter--md;
+  display: flex;
+  // justify-content: flex-end;
+  align-items: center;
+}

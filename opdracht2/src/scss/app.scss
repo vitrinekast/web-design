@@ -3,16 +3,22 @@
 @import 'config';
 @import 'utils';
 
+@import 'plugins/prism';
+
 @import 'typography';
 @import 'layout';
 @import 'views';
 
 @import 'lists';
 @import 'navigation';
+@import 'header';
 @import 'section';
+@import 'footer';
 @import 'article';
 
 @import 'buttons';
 @import 'cards';
+@import 'input';
 @import 'label';
+@import 'icon';
 @import 'media';

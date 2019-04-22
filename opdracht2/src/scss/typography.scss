@@ -1,7 +1,8 @@
 $font-size--base: 1rem;
 
 // @import url('https://fonts.googleapis.com/css?family=Lato:900|Lato:700|Lato:400');
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,500,700');
+
 
 html {
   font-size: 16px;
@@ -73,6 +74,10 @@ a {
   &:hover {
     color :$color__accent;
   }
+}
+.link {
+  color: $color__accent;
+  text-decoration: underline;
 }
 
 article {

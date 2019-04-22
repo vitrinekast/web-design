@@ -1,32 +1,114 @@
 
+
 article {
   section.fn-readme {
     position: relative;
     padding-top: 50px;
   }
-  
+
   a {
-    color: $color__accent;
-    text-decoration: underline;
+    @extend .link;
   }
-  
-  ul, ol {
+
+  ol,
+  ul {
     list-style: unset;
     padding-left: $gutter--md*1.5;
   }
-  
+
   table {
     text-align: left;
-    
+
     tr:nth-of-type(odd) {
-      background-color: lighten( $color__black, 95% );
+      background-color: lighten($color__black, 95%);
     }
-    th, td {
+
+    td,
+    th {
       padding: $gutter--sm/2 $gutter--sm $gutter--sm/2 0;
-      
+
       &:first-of-type {
         padding-left: $gutter--sm/2;
       }
     }
   }
+}
+
+.article {
+  &--code {
+    position: relative;
+    margin: $gutter--md 0;
+    table {
+      white-space: pre-wrap
+    }
+
+    .hljs {
+      background-color: transparent;
+    }
+
+    .hljs-ln-n {
+      padding: 0 $gutter--md;
+      font-weight: lighter;
+    }
+
+    tr > td {
+      padding: 8px 0;
+    }
+    
+    tr:not(.is-multi-select-parent) {
+      // opacity: .2 ;
+    }
+    
+    .is-multi-select-parent {
+      border-left: 2px solid $color__accent;
+      border-right: 2px solid $color__accent;
+      
+      &:first-child, &-first {
+        border-top: 2px solid $color__accent;
+      }
+      &-last {
+        border-bottom: 2px solid $color__accent;
+      }
+    }
+
+    tr:nth-of-type(odd) {
+      background-color: rgba($color__black,.05);
+    }
+  }
+}
+
+.is-multi-select {
+  // border: 2px solid red;
+}
+
+
+.hljs-ln{
+  width: 100%;
+}
+
+.fn-review-elem .voted {
+  &, & ~ .hljs-ln-code {
+    background-color: rgba($color__green, .1);
+  }
+  &[data-vote-down], &[data-vote-down] ~ .hljs-ln-code {
+    background-color: rgba($color__red, .1);
+  }
+  &[data-vote-up]:before {
+    border-color: blue;
+    content: '🤘';
+  }
+
+  &[data-vote-down]:before {
+    border-color: blue;
+    content: '🧐';
+  }
+
+
+  &:before {
+
+    position: absolute;
+    left: -5em;
+    font-size: 16px;
+  }
+
 }

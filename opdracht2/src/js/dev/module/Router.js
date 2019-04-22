@@ -1,9 +1,12 @@
+let router;
+
 var Router = (function () {
     const APP_SELECTOR = '.fn-app';
 
     let appContainer;
-    let router;
+    
 
+    const CREATED_VIEW_E = 'created-view';
 
     var init = function () {
         // setup the navigo router
@@ -18,99 +21,147 @@ var Router = (function () {
 
         router
             .on({
+                'review/:reviewid/:fileid/finish': function (params) {
+                  Git.finishReview(params);
+                  router.navigate(`/review/${params.reviewid}/${parseInt(params.fileid) + 1}`);
+                },
+                'review/:reviewid/:fileid': function (params) {
+                    
+                    getView('review.ejs', params);
+                    onUpdatePage();
 
-                ':category': function (params) {
-                    getView('courses.ejs', params);
-                    window.scrollTo(0, 0);
-                    
-                },
-                ':category/:courseid': function (params) {
-                    getView('detail.ejs', params);
-                    Git.getForks(params);
-                    window.scrollTo(0, 0);
-                    
-                },
-                'course/:courseid/:user/:repo': function (params) {
-                    Git.getRepo(params, function (apiData) {
-                        getView('work.ejs', params, apiData);
-                        Git.getReadme(params);
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        // Git.displayCode(params);
+                        Api.displayPartial('file', params);
                         
                     });
-                    window.scrollTo(0, 0);
-                },
-                'cool': function (params) {
-                    getView('cool.ejs', {});
-                    window.scrollTo(0, 0);
                     
+                    ee.addOnceListener('created-partial-code', function (e) {
+                        
+                        Navigation.update();
+                        Navigation.multiSelect();
+                        Navigation.vote();
+                    });
+                    
+
                 },
+                'review/thanks': function (params) {
+                    getView('thanks.ejs', params);
+                    onUpdatePage();
+
+                },
+                'review/:reviewid': function (params) {
+                    getView('review.ejs', params);
+                    onUpdatePage();
+
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        // Git.displayCode(params);
+                        Api.displayPartial('file', params);
+                        
+                    });
+                    
+                    ee.addOnceListener('created-partial-code', function (e) {
+                        
+                        Navigation.update();
+                        Navigation.multiSelect();
+                        Navigation.vote();
+                    });
+                },
+                
+
                 '*': function (params) {
                     getView('home.ejs', {});
-                    window.scrollTo(0, 0);
+                    onUpdatePage();
                     
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                        Api.displayPartial('review', params);
+                    });
+                    
+                    ee.addOnceListener('created-partial', function (e) {
+                        
+                        Navigation.update();
+                        router.updatePageLinks();
+                    });
+
+
+
                 }
             })
             .resolve();
     }
-    var createView = function (str, params) {
+
+    var onUpdatePage = function (params) {
+        ee.addOnceListener(CREATED_VIEW_E, function (e) {
+            router.updatePageLinks();
+            window.scrollTo(0, 0);
+            Navigation.update();
+        });
+    }
+    var getSubData = function (str, params) {
         if(!params) { params = {} }
 
-        let subdata = data;
-
-        if(params.category) {
-            subdata = subdata[params.category];
-        }
-
-        if(params.courseid) {
-            subdata = subdata.items.find((item) => {
-                return item.id === params.courseid
-            })
-        }
-        parseViewData(str, subdata)
+          // let subdata = data;
+          return data
+        // 
+        // if(params.category) {
+        //     subdata = subdata[params.category];
+        // }
+        // 
+        // if(params.courseid) {
+        //     subdata = subdata.items.find((item) => {
+        //         return item.id === params.courseid
+        //     })
+        // }
+        // if(params.reviewid) {
+        //     subdata = subdata.review.find((item) => {
+        //         return item.id === parseInt(params.reviewid)
+        //     })
+        // }
+      
+        return subdata
 
     }
 
-    var parseViewData = function (str, subdata) {
-        let template = ejs.compile(str, {});
-
-        let html = ejs.render(str, { data: subdata }, {});
-        appContainer.innerHTML = html
-        router.updatePageLinks();
-        
-    }
 
     var getView = function (url, params, apiData) {
+
         fetch(url)
             .then(function (response) {
                 return response.text();
             })
             .then(function (str) {
-                if(apiData) {
-                    parseViewData(str, apiData);
-                } else {
-                    createView(str, params, data);
+                if(!apiData) {
+                    apiData = getSubData(str, params);
                 }
 
-            })
-    }
-
-    var getPartial = function (url, selector, apiData) {
-        fetch(url)
-            .then(function (response) {
-                return response.text();
-            })
-            .catch(error => console.error('Error:', error))
-            .then(function (str) {
-                if(apiData.message === 'Not Found') { return false }
                 let template = ejs.compile(str, {});
 
                 let html = ejs.render(str, { data: apiData }, {});
-                document.querySelector(selector).innerHTML = html
-                router.updatePageLinks();
+                appContainer.innerHTML = html;
+
+                ee.emitEvent(CREATED_VIEW_E, ['url']);
             })
     }
+
+    // var getPartial = function (url, selector, apiData) {
+    //     fetch(url)
+    //         .then(function (response) {
+    //             return response.text();
+    //         })
+    //         .catch(error => console.error('Error:', error))
+    //         .then(function (str) {
+    //             if(apiData.message === 'Not Found') { return false }
+    //             let template = ejs.compile(str, {});
+    // 
+    //             let html = ejs.render(str, { data: apiData }, {});
+    //             document.querySelector(selector).innerHTML = html
+    //             router.updatePageLinks();
+    //             Navigation.update();
+    //         })
+    // }
     return {
         init: init,
         getView: getView,
-        getPartial: getPartial
+        // getPartial: getPartial
     }
 })();
