@@ -6,11 +6,11 @@ $font-size--base: 1rem;
 
 $color__white: white;
 $color__black: black;
-$color__grey: grey;
+$color__grey: #4C4C4C;
 $color__green: green;
 $color__red: red;
 
-$color__accent: tomato;
+$color__accent: blue;
 
 // gutters
 
@@ -30,4 +30,4 @@ $card_height: 300px;
 
 // transitions
 
-$transition__base: .3s ease-in;
+$transition__base: .2s ease-in;

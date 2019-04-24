@@ -1,9 +1,36 @@
-<% var home = true %>
-<h2>Up for review</h2>
+
+<article class="">
+  <h2>Up for review</h2>
+  <p>The following items are put up for review:</p>
+</article>
 
 <ul class='list list--wide fn-list-review'>
-  
+  <% data.forEach(function(item) { %>
+  <%
+    let firstId = 'false';
+    
+      if(item.files) {
+        firstId = item.files.find((file) => {
+          
+          return !file.reviewed
+        }).id
+        
+      }
+     %>
+  <li class=''>
+    <a href="/review/<%= item.id %>/<%= firstId %>" data-navigo class='list__item'>
+      <div class="">
+        <h3>
+          <%= item.repoName %>
+        </h3>
+        <p>
+          <%= item.student %>
+        </p>
+      </div>
+      <div class="">
+        <i class="material-icons icon icon--lg"> navigate_next </i>
+      </div>
+    </a>
+  </li>
+  <% }) %>
 </ul>
-
-
-

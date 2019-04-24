@@ -1,7 +1,54 @@
-
 <div class="layout layout--detail">
   <div class="layout--left">
     <div class="fn-api-file">
+      <%
+
+
+        var currentFile = data.files.find((item, index) => {
+          return item.id === parseInt(data.params.fileid)
+        })
+        if(!currentFile) {
+          router.navigate('/review/thanks')
+        }
+        
+        var finishedFiles = data.files.filter((item) => {
+          return item.reviewed
+        }).length
+        var progress = (data.params.fileid/data.files.length)*100;
+
+
+       %>
+      
+      <header class='header-review'>
+        <h2 class='header__title'>
+          <%= data.repoName %>/
+          <%= currentFile.name %>
+        </h2>
+        <progress class='progress' value="<%= progress %>" max="100">
+        </progress>
+        <p>Review voortgang:
+          <%= data.params.fileid %> van de
+          <%= data.files.length %> afgerond
+          <%= progress %>
+        </p>
+      </header>
+      <article class="">
+        <%- currentFile.description %>
+        <h3>De code:</h3>
+      </article>
+      <div class="article--code">
+        <code class='line-numbers'>
+          <pre class="fn-review-elem line-numbers " id="editor"></pre>
+        </code>
+        <nav class='nav-vote'>
+          <p class='nav-vote__description'>Leave a review of a line of code using the power of emoji!</p>
+        
+          <a href="#" class='nav-vote__item fn-vote-up'>
+          <span class='text--large'>🤘</span>(press g, h, j, k or l) </a>
+          <a href="#" class='nav-vote__item fn-vote-down'>
+            <span class='text--large'>🧐</span>(press f, d, s or a) </a>
+        </nav>
+      </div>
     </div>
   </div>
   <div class="layout--right">
@@ -9,8 +56,11 @@
   </div>
 </div>
 <footer class='footer footer-nav'>
-
-  <div class="">
-    <a href="<%= window.location.hash %>/finish" class='button button--green button--lg' data-navigo>Naar het volgende bestand</a>
-  </div>
+  
+    <a href="<%= window.location.hash %>/finish" class='button button--wide button--lg' data-navigo>
+      <div class="button__inner">
+        Naar het volgende bestand
+      </div>
+    </a>
+  
 </footer>

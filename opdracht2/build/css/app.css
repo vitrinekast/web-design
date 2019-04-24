@@ -58,7 +58,7 @@ table {
   box-sizing: border-box;
 }
 
-.nav-vote, .nav-vote__item, .button__inner {
+.button__inner {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -86,10 +86,6 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #333;
-}
-
-p {
-  margin-bottom: 1.25em;
 }
 
 h1,
@@ -146,11 +142,11 @@ a {
 }
 
 a:hover {
-  color: tomato;
+  color: blue;
 }
 
 .link, article a {
-  color: tomato;
+  color: blue;
   text-decoration: underline;
 }
 
@@ -194,7 +190,7 @@ main {
   -ms-flex-align: center;
   align-items: center;
   padding: 1em;
-  margin: 1em 0;
+  margin: 2em 0;
   border: 1px solid black;
 }
 
@@ -207,29 +203,36 @@ main {
 }
 
 .nav-vote {
-  color: white;
-  transition: 0.3s ease-in;
+  transition: 0.2s ease-in;
   position: absolute;
   top: 0;
   left: 100%;
-  transform: translate3d(0%, 0%, 0);
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  pointer-events: none;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: white;
+  transform: translate3d(0%, 6px, 0);
+  border-top: 4px solid #4C4C4C;
+  width: 250px;
+  padding: 0.5em;
+}
+
+.nav-vote__description {
+  display: block;
+  margin-bottom: 1em;
+  margin-top: 0.5em;
 }
 
 .nav-vote__item {
-  padding: 0.125em 1em;
-  background-color: gray;
-  color: white;
-  text-decoration: none;
+  display: block;
+  letter-spacing: -1px;
+  padding: 0.125em 0;
 }
 
 .nav-vote__item span {
   transition: .1s ease-in;
+  font-size: 1.2em;
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  display: inline-block;
+  padding-right: 0.5em;
 }
 
 .nav-vote__item.animate span {
@@ -238,7 +241,7 @@ main {
 }
 
 .nav-vote__item:hover {
-  background-color: tomato;
+  background-color: blue;
   color: white;
 }
 
@@ -263,7 +266,7 @@ main {
   width: calc(100% - 1em);
   transform: translate3d(0, 0.5em, 0);
   opacity: 0;
-  transition: 0.3s ease-in;
+  transition: 0.2s ease-in;
 }
 
 .nav__item:hover:before {
@@ -277,7 +280,7 @@ article *:focus ~ .nav-vote {
 }
 
 article *:focus ~ .nav-vote .nav-vote__item {
-  background-color: tomato;
+  background-color: blue;
 }
 
 .header {
@@ -308,6 +311,10 @@ article *:focus ~ .nav-vote .nav-vote__item {
   display: flex;
   -ms-flex-align: center;
   align-items: center;
+}
+
+article p {
+  margin-bottom: 1.25em;
 }
 
 article section.fn-readme {
@@ -361,21 +368,27 @@ article table th:first-of-type {
   padding: 8px 0;
 }
 
-.article--code .is-multi-select-parent {
-  border-left: 2px solid tomato;
-  border-right: 2px solid tomato;
-}
-
-.article--code .is-multi-select-parent-first, .article--code .is-multi-select-parent:first-child {
-  border-top: 2px solid tomato;
-}
-
-.article--code .is-multi-select-parent-last {
-  border-bottom: 2px solid tomato;
+.article--code tr {
+  padding: 2px;
 }
 
 .article--code tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.article--code .is-multi-select {
+  background-color: rgba(0, 0, 255, 0.1) !important;
+  padding: 0px;
+  border-left: 2px solid blue;
+  border-right: 2px solid blue;
+}
+
+.article--code .is-multi-select-first, .article--code .is-multi-select:first-child {
+  border-top: 2px solid blue;
+}
+
+.article--code .is-multi-select-last {
+  border-bottom: 2px solid blue;
 }
 
 .hljs-ln {
@@ -408,6 +421,10 @@ article table th:first-of-type {
   font-size: 16px;
 }
 
+.is-selected .hljs-ln tr:not(.is-multi-select) {
+  opacity: .2;
+}
+
 article h1,
 article h2,
 article h3,
@@ -422,12 +439,20 @@ article h5 {
   padding: 0.5em;
   color: black;
   margin: 0 0.25em;
-  border-radius: 4px;
   text-align: center;
+  display: inline-block;
+  border: 1px solid #4C4C4C;
+  transition: 0.2s ease-in;
+}
+
+.button:hover {
+  background-color: blue;
+  color: white;
+  border-color: blue;
 }
 
 .button--accent {
-  background-color: tomato;
+  background-color: blue;
   margin: 1em 0;
   color: white;
 }
@@ -440,14 +465,23 @@ article h5 {
 
 .button--white {
   background-color: white;
-  color: tomato;
+  color: blue;
   width: 100%;
   display: block;
 }
 
 .button--lg {
   font-size: 1em;
-  padding: 2em 2em;
+  padding: 2em;
+}
+
+.button--md {
+  font-size: 1em;
+  padding: 1em;
+}
+
+.button--wide {
+  width: 100%;
 }
 
 .button .ic + span,

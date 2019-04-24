@@ -1,4 +1,9 @@
 article {
+  p {
+    margin-bottom: 1.25em;
+  }
+
+
   section.fn-readme {
     position: relative;
     padding-top: 50px;
@@ -53,12 +58,19 @@ article {
     tr > td {
       padding: 8px 0;
     }
-
-    tr:not(.is-multi-select-parent) {
+    tr {
+      padding: 2px;
+    }
+    tr:not(.is-multi-select) {
       // opacity: .2 ;
     }
+    tr:nth-of-type(odd) {
+      background-color: rgba($color__black,.05);
+    }
 
-    .is-multi-select-parent {
+    .is-multi-select {
+      background-color: rgba($color__accent,.1) !important;
+      padding: 0px;
       border-left: 2px solid $color__accent;
       border-right: 2px solid $color__accent;
 
@@ -72,9 +84,7 @@ article {
       }
     }
 
-    tr:nth-of-type(odd) {
-      background-color: rgba($color__black,.05);
-    }
+    
   }
 }
 
@@ -116,6 +126,9 @@ article {
 
 }
 
+.is-selected .hljs-ln tr:not(.is-multi-select) {
+  opacity: .2;
+}
 
 article {
   h1,

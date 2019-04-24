@@ -1,6 +1,9 @@
 // Javascripts
 
 let ee;
+const CREATED_VIEW_E = 'created-view';
+const APP_SELECTOR = '.fn-app';
+
 window.onload = function () {
 
     if(!keys) {
@@ -8,7 +11,6 @@ window.onload = function () {
     }
     ee = new EventEmitter();
     Router.init();
-    Git.init();
     Navigation.init();
     
 };

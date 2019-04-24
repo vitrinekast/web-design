@@ -1,61 +1,120 @@
 var Api = (function () {
+  
+    const REVIEW_ELEM_SELECTOR = '.fn-review-elem';
+    const FIREBASE_PROJECT_ID = 'opdracht-2-iteratie';
+    
     var init = function () {
 
     }
 
-    var mergePartialWithData = function (params, url, templateUrl, eventName, selector, cb) {
-        
-        let combineTemplateWithData = function (templateString, apiData) {
-            let template = ejs.compile(templateString, {});
-            let html = ejs.render(templateString, { data: apiData }, {});
-            
-            document.querySelector(selector).innerHTML = html;
-            
-            ee.emitEvent('created-partial', [name]);
-            
-            if(cb) {
-              cb(apiData);
-            }
-            
-        }
+    let combineTemplateWithData = function (templateString, apiData, selector, cb) {
+        let template = ejs.compile(templateString, {});
+        let html = ejs.render(templateString, { data: apiData }, {});
 
-        fetch(templateUrl)
+        document.querySelector(selector).innerHTML = html;
+
+        if(cb) {
+            cb(apiData);
+        }
+    }
+
+    var mergePartialWithData = function (params, url, templateUrl, eventName, selector, cb) {
+        getTextContent(templateUrl)
             .then((templateResponse) => {
-                return templateResponse.text();
-            })
-            .then((templateResponse) => {
-                fetch(url)
+                getApi(url)
                     .then((apiResponse) => {
-                        return apiResponse.json();
-                    })
-                    .then((apiResponse) => {
-                        apiResponse.params = params
-                        combineTemplateWithData(templateResponse, apiResponse);
+                        apiResponse.params = params;
+                        combineTemplateWithData(templateResponse, apiResponse, selector, cb);
                     })
             })
     }
 
-    var displayPartial = function (name, params) {
+    async function getTextContent(templateUrl) {
+        let response = await fetch(templateUrl);
+        let data = await response.text()
+        return data;
+    }
 
-        if(name == 'review') {
-            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/${name}.json`;
-            const templateUrl = 'list-review.ejs';
-            mergePartialWithData(params, url, templateUrl, 'created-partial', '.fn-list-review');
-        }
-        if(name == 'file') {
-            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
-            const templateUrl = 'data-file.ejs';
-            mergePartialWithData(params, url, templateUrl, 'created-partial', '.fn-api-file', function (data) {
-              Git.displayCode(data)
+    async function getApi(url) {
+        let response = await fetch(url);
+        let data = await response.json()
+        return data;
+    }
+
+    async function post(url, postData) {
+        let response = await fetch(url, {
+          method: 'PUT', 
+          body: JSON.stringify(postData), 
+          headers: {
+              'Content-Type': 'application/json'
+          }
+        });
+        let data = await response.json()
+        return data;
+    }
+
+    var displayView = function (name, params) {
+
+        if(name == 'home') {
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review.json`;
+            const templateUrl = 'home.ejs';
+
+            mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
+                ee.emitEvent(CREATED_VIEW_E, [name]);
             });
+        } else if(name == 'review') {
 
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
+            const templateUrl = 'review.ejs';
+
+            mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
+                ee.emitEvent(CREATED_VIEW_E, [name]);
+                displayCode(data)
+
+            });
+        }
+    }
+
+    var displayCode = function (data) {
+        let currentFile = data.files.find((item) => {
+            return item.id === parseInt(data.params.fileid)
+        })
+        let codeElem = document.querySelector(REVIEW_ELEM_SELECTOR);
+        let url = `${currentFile.url}?client_id=${keys.GITHUB_CLIENT_ID}&client_secret=${keys.GITHUB_CLIENT_SECRET}`;
+
+        getTextContent(url)
+            .then((string) => {
+                codeElem.textContent = parseCode(currentFile.type, string);
+                hljs.highlightBlock(codeElem);
+                hljs.lineNumbersBlock(codeElem);
+
+                window.setTimeout(function () {
+                    ee.emitEvent('created-partial');
+
+                }, 50)
+            })
+    }
+
+    var parseCode = function (type, data) {
+        const codeConfig = {
+            indent_size: 2,
+            space_in_empty_paren: true
         }
 
+        if(type === 'css') {
+            return css_beautify(data, codeConfig);
+        } else if(type === 'javascript') {
+            return js_beautify(data, codeConfig);
+        } else if(type === 'html') {
+            return html_beautify(data, codeConfig);
+        } else {
+            return data
+        }
     }
 
     var updateReviewedFile = function (params) {
-        let url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files.json`;
-        
+        let url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files.json`;
+
         let files;
 
         fetch(url)
@@ -63,12 +122,12 @@ var Api = (function () {
                 return response.json();
             })
             .then((response) => {
-                
+
                 let first = response.find((item) => {
                     return !item.reviewed;
                 })
                 first.reviewed = true;
-                const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${first.id}.json`;
+                const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${first.id}.json`;
                 fetch(url, {
                         method: 'PUT', // or 'PUT'
                         body: JSON.stringify(first), // data can be `string` or {object}!
@@ -77,67 +136,24 @@ var Api = (function () {
                         }
                     }).then(res => res.json())
                     .then(function (response) {
-                        
+
 
 
                     })
                     .catch(error => console.error('Error:', error));
             })
 
-        // fetch(url, {
-        //         method: 'PUT', // or 'PUT'
-        //         body: JSON.stringify(currentVote), // data can be `string` or {object}!
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }).then(res => res.json())
-        //     .then(function (response) {
-        //         
-        //         displayVotes(params);
-        // 
-        //     })
-        //     .catch(error => console.error('Error:', error));
     }
+    
+  
 
 
-    // var displayPartial = function (name) {
-    //     if(name == 'review') {
-    //         
-    // 
-    //         const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/${name}.json`;
-    //         const templateUrl = 'list-review.ejs';
-    // 
-    //         fetch(templateUrl)
-    //             .then(function (response) {
-    //                 return response.text();
-    //             })
-    //             .then(getApiData)
-    //             .then(function (htmlString) {
-    //                 fetch(url)
-    //                     .then(function (response) {
-    //                         return response.json();
-    //                     })
-    //                     .catch(error => console.error('Error:', error))
-    //                     .then(function (apiData) {
-    //                         
-    //                         let template = ejs.compile(htmlString, {});
-    // 
-    //                         let html = ejs.render(htmlString, { data: apiData }, {});
-    //                         document.querySelector('.fn-list-review').innerHTML = html;
-    //                         ee.emitEvent('created-partial', [name]);
-    //                     })
-    //             })
-    // 
-    // 
-    // 
-    //     }
-
-
-    // }
 
     return {
         init: init,
-        displayPartial: displayPartial,
-        updateReviewedFile: updateReviewedFile
+        updateReviewedFile: updateReviewedFile,
+        displayView: displayView,
+        post: post,
+        getApi: getApi
     }
 })();

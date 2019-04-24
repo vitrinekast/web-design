@@ -1,31 +1,42 @@
 .nav {
   &-vote {
-    @extend %flex--center;
-    color: $color__white;
+    // @extend %flex--center;
     transition: $transition__base;
     position: absolute;
     top: 0;
     left: 100%;
-    transform: translate3d(0%, 0%, 0);
+    background-color: $color__white;
+    transform: translate3d(0%,6px, 0);
+    border-top: 4px solid $color__grey;
     
-    flex-wrap: wrap;
-    pointer-events: none;
-    border-radius: $border-radius;
-    overflow: hidden;
-    box-shadow: $box-shadow;
-
+    width: 250px;
+    padding: $gutter--sm;
+    
+    &__description {
+      display: block;
+      margin-bottom: $gutter--md;
+      margin-top: $gutter--sm;
+    }
+    
     &__item {
-      @extend %flex--center;
-      padding: $gutter--sm/4 $gutter--md;
-      background-color: lighten($color__black, 50%);
-      color: $color__white;
-      text-decoration: none;
-
+      display: block;
+      letter-spacing: -1px;
+      // @extend %flex--center;
+      padding: $gutter--sm/4 0;
+      // background-color: lighten($color__black, 50%);
+      // color: $color__white;
+      // text-decoration: none;
+      
       span {
         transition: .1s ease-in;
+        font-size: 1.2em;
+        transform: scale(1.1);
+        display: inline-block;
+        padding-right: $gutter--sm;
       }
 
       &.animate {
+        
         span {
           transform: scale(1.9);
         }
