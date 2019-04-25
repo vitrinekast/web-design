@@ -1,8 +1,10 @@
+const FIREBASE_PROJECT_ID = 'opdracht-2-iteratie';
+
 var Api = (function () {
-  
+
     const REVIEW_ELEM_SELECTOR = '.fn-review-elem';
-    const FIREBASE_PROJECT_ID = 'opdracht-2-iteratie';
-    
+
+
     var init = function () {
 
     }
@@ -43,11 +45,11 @@ var Api = (function () {
 
     async function post(url, postData) {
         let response = await fetch(url, {
-          method: 'PUT', 
-          body: JSON.stringify(postData), 
-          headers: {
-              'Content-Type': 'application/json'
-          }
+            method: 'PUT',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         let data = await response.json()
         return data;
@@ -71,6 +73,14 @@ var Api = (function () {
                 ee.emitEvent(CREATED_VIEW_E, [name]);
                 displayCode(data)
 
+            });
+        } else if(name == 'thanks') {
+
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
+            const templateUrl = 'thanks.ejs';
+
+            mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
+                ee.emitEvent(CREATED_VIEW_E, [name]);
             });
         }
     }
@@ -144,8 +154,8 @@ var Api = (function () {
             })
 
     }
-    
-  
+
+
 
 
 

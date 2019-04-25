@@ -1,0 +1,13 @@
+
+<header class='header-review'>
+  <h2 class='header__title'>
+    <%= data.repoName %>/
+    <%= currentFile.name %>
+  </h2>
+  <progress class='progress' value="<%= progress %>" max="100">
+  </progress>
+  <p>Review voortgang:
+    <%= data.params.fileid %> van de
+    <%= data.files.length %> afgerond
+  </p>
+</header>

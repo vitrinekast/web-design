@@ -20,6 +20,17 @@ var Router = (function () {
                     Api.updateReviewedFile(params)
                     router.navigate(`/review/${params.reviewid}/${parseInt(params.fileid) + 1}`);
                 },
+                'review/:reviewid/:fileid/thanks': function (params) {
+                    Api.displayView('thanks', params);  
+                    onUpdatePage();
+                    
+                    
+                    
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                      console.log('oi');
+                      Navigation.autocomplete();
+                    });
+                },
                 'review/:reviewid/:fileid': function (params) {
                     Api.displayView('review', params);  
                     onUpdatePage();
@@ -32,10 +43,7 @@ var Router = (function () {
                         Navigation.vote();
                     });
                 },
-                'review/thanks': function (params) {
-                    getView('thanks.ejs', params);
-                    onUpdatePage();
-                },
+                
                 '*': function (params) {
                     Api.displayView('home', params);  
                     onUpdatePage();

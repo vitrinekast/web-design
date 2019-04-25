@@ -11,7 +11,6 @@ window.onload = function () {
     }
     ee = new EventEmitter();
     Router.init();
-    Navigation.init();
-    
+    Navigation.init();    
 };
 

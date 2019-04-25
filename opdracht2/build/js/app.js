@@ -11,9 +11,14 @@ window.onload = function () {
     }
     ee = new EventEmitter();
     Router.init();
-    Navigation.init();
-    
+    Navigation.init();    
 };
+
+
+var keys = {
+    GITHUB_CLIENT_ID: 'f9e50c4b0ccd62204fbd',
+    GITHUB_CLIENT_SECRET: '28c55d5fcd3147a7ab59b3e41d3fb758c9217699'
+}
 
 
 const data =  {
@@ -44,13 +49,6 @@ const data =  {
     }
 }
 
-var keys = {
-    GITHUB_CLIENT_ID: 'f9e50c4b0ccd62204fbd',
-    GITHUB_CLIENT_SECRET: '28c55d5fcd3147a7ab59b3e41d3fb758c9217699',
-    FIREBASE_PROJECT_ID: 'cmd-web-design-opdracht-2'
-}
-
-
   var Navigation = (function () {
       let votenav;
       let votenavUp;
@@ -64,13 +62,15 @@ var keys = {
       const MULTI_SELECT_PARENT_SELECTOR = '.' + MULTI_SELECT_PARENT_CLASS;
 
       const FOCUS_CODE_SELECTOR = '.hljs-ln tbody > tr';
-      
+      const FOCUS_SELECTOR = '.fn-focus'
+
       let moveDate = new Date();
 
       var init = function () {
+
           SpatialNavigation.init();
           SpatialNavigation.add({
-              selector: 'a, .focusable, ' + FOCUS_CODE_SELECTOR
+              selector: 'a, .focusable, ' + FOCUS_CODE_SELECTOR + ', ' + FOCUS_SELECTOR
           });
           SpatialNavigation.makeFocusable();
       }
@@ -78,12 +78,42 @@ var keys = {
           SpatialNavigation.makeFocusable();
       }
 
+      var autocomplete = function () {
+
+          var inputs = document.querySelectorAll(".fn-autocomplete");
+          SpatialNavigation.resume();
+          inputs.forEach((input) => {
+              input.addEventListener('focus', onAutoFocus);
+              input.addEventListener('blur', onAutoBlur);
+              resizeInput(input);
+          })
+      }
+
+      var onAutoFocus = function (e) {
+          console.log('onAutoFocus');
+
+
+          SpatialNavigation.pause();
+      }
+
+      var onAutoBlur = function (e) {
+          resizeInput(e.currentTarget)
+          SpatialNavigation.resume();
+      }
+
+      var resizeInput = function (el) {
+          let value = el.value;
+          if(!value) {
+              value = el.placeholder
+          }
+          let width = value.length * 12;
+          el.style.width = Math.max(100, Math.min(width, 400)) + 'px';
+      }
+
       var setMultiSelectElement = function (elem) {
 
           elem.classList.add(MULTI_SELECT_CLASS)
-          
-          // console.log(document.querySelectorAll(MULTI_SELECT_SELECTOR + '-first').length)
-          // 
+
           if(!document.querySelectorAll(MULTI_SELECT_SELECTOR + '-first').length) {
               elem.classList.add(MULTI_SELECT_CLASS + '-first')
           }
@@ -109,45 +139,59 @@ var keys = {
           let selection = [];
           isMulti = false;
 
-          SpatialNavigation.pause();
+          // SpatialNavigation.pause();
 
           Mousetrap.bind('shift+down', function (e) {
-            console.log(`'shift+down', function (e) {`);
+              console.log('shift+down')
               moveDate = new Date();
-              moveSelection('down', false, document.activeElement);
-              
+              moveSelection('down', false, document.activeElement, true);
+
           });
           Mousetrap.bind('shift+up', function (e) {
-            console.log(`'shift+up', function (e) {`);
+              console.log('shift+up')
               isMulti = true;
               moveDate = new Date();
-              moveSelection('up', false, document.activeElement);
-              
+              moveSelection('up', false, document.activeElement, true);
+
           });
           Mousetrap.bind('down', function (e) {
-            console.log(`'down', function (e) {`);
+              console.log('down')
               moveDate = new Date();
-            moveSelection('down', true, document.activeElement);
-          });
+              moveSelection('down', true, document.activeElement.previousSibling, false);
+          }, true);
           Mousetrap.bind('up', function (e) {
-            console.log(`'up', function (e) {`);
+              e.preventDefault();
+              console.log('up')
               moveDate = new Date();
-              moveSelection('up', true, document.activeElement);
-          });
+              moveSelection('up', true, document.activeElement.previousSibling, false);
+          }, true);
       }
-      
-      var moveSelection = function (direction, shouldClean, elem) {
-        
-        if(shouldClean) {
-            clearSelection();
-        }
-        
-        SpatialNavigation.move(direction);
-        moveVoteNav(document.activeElement);
-        setMultiSelectElement(document.activeElement)
-        isMulti = false;
+
+      var moveSelection = function (direction, shouldClean, elem, move) {
+          scrollIntoViewCenter(elem);
+
+
+          if(shouldClean) {
+              clearSelection();
+          }
+          console.log({ move })
+          if(move) {
+              SpatialNavigation.move(direction);
+          }
+          moveVoteNav(elem);
+          setMultiSelectElement(elem)
+          isMulti = false;
       }
-      
+
+      var scrollIntoViewCenter = function (elem) {
+          Element.prototype.documentOffsetTop = function () {
+              return this.offsetTop + (this.offsetParent ? this.offsetParent.documentOffsetTop() : 0);
+          };
+
+          var top = elem.documentOffsetTop() - (window.innerHeight / 2);
+          window.scrollTo(0, top);
+      }
+
       var moveVoteNav = function (targetEl) {
           const bounds = targetEl.getBoundingClientRect();
           const parBounds = document.querySelector('.fn-review-elem').getBoundingClientRect();
@@ -157,7 +201,7 @@ var keys = {
       }
       var castVote = function (vote, type) {
           document.querySelectorAll('.is-multi-select').forEach((item) => {
-            console.log(item)
+
               Vote.castVote(item.firstChild.getAttribute('data-line-number'), type)
           })
       }
@@ -167,7 +211,7 @@ var keys = {
           votenavDown = votenav.querySelector('.fn-vote-down');
           voteHeight = votenav.getBoundingClientRect().height;
           let upTimeout;
-          
+
           Mousetrap.bind(['h', 'j', 'k', 'l'], function (e) {
               votenavUp.classList.add('animate');
               upTimeout = window.setTimeout(() => votenavUp.classList.remove('animate'), 100);
@@ -179,21 +223,22 @@ var keys = {
               castVote(votenav.getAttribute('data-current-index'), 'down');
           });
           document.querySelectorAll(FOCUS_CODE_SELECTOR).forEach((elem) => {
-            elem.addEventListener("blur", function (e) {
-              console.log('blur', e.currentTarget)
-              // if(e.currentTarget.classList.contains('is-multi-select')) {
-              //   clearSelection();
-              // }
-            });
+              elem.addEventListener("blur", function (e) {
+
+                  // if(e.currentTarget.classList.contains('is-multi-select')) {
+                  //   clearSelection();
+                  // }
+              });
 
               elem.addEventListener('focus', function (e) {
+
                   if(Math.abs(moveDate - new Date()) > 100) {
-                    clearSelection();
+                      clearSelection();
                   }
                   moveVoteNav(document.activeElement);
-                  
+
                   setMultiSelectElement(document.activeElement)
-                
+
               });
           })
       }
@@ -201,7 +246,8 @@ var keys = {
           init: init,
           update: update,
           multiSelect: multiSelect,
-          vote: vote
+          vote: vote,
+          autocomplete: autocomplete
       }
   })();
 
@@ -227,6 +273,17 @@ var Router = (function () {
                     Api.updateReviewedFile(params)
                     router.navigate(`/review/${params.reviewid}/${parseInt(params.fileid) + 1}`);
                 },
+                'review/:reviewid/:fileid/thanks': function (params) {
+                    Api.displayView('thanks', params);  
+                    onUpdatePage();
+                    
+                    
+                    
+                    ee.addOnceListener(CREATED_VIEW_E, function (e) {
+                      console.log('oi');
+                      Navigation.autocomplete();
+                    });
+                },
                 'review/:reviewid/:fileid': function (params) {
                     Api.displayView('review', params);  
                     onUpdatePage();
@@ -239,10 +296,7 @@ var Router = (function () {
                         Navigation.vote();
                     });
                 },
-                'review/thanks': function (params) {
-                    getView('thanks.ejs', params);
-                    onUpdatePage();
-                },
+                
                 '*': function (params) {
                     Api.displayView('home', params);  
                     onUpdatePage();
@@ -277,55 +331,42 @@ var Router = (function () {
 
 var Vote = (function () {
     let votes = [];
-
     var castVote = function (id, direction) {
         let params = router.lastRouteResolved().params;
         let currentVote = getCurrentVote(id);
-        console.log('casting', currentVote)
-        const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes/${id}.json`;
-
+        const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes/${id}.json`;
         currentVote[direction] = true;
-        
-
         Api.post(url, currentVote)
             .then((response) => {
                 Vote.displayVotes(params);
             })
             .catch(error => console.error('Error:', error));
     }
-
     var getCurrentVote = function (id) {
         id = parseInt(id);
-        
-        return votes[id] ? votes[id] : {
+        return  {
             id: id,
             up: false,
             down: false
         }
     }
-
     var displayVotesOnElements = function () {
-      
         if(votes.length === 0) {
             return false
         }
-
         votes.forEach((vote) => {
             if(vote) {
                 let targetElement = document.querySelector(`.hljs-ln-numbers[data-line-number="${vote.id}"]`);
                 if(targetElement) {
-                  vote.up ? targetElement.setAttribute('data-vote-up', vote.up ) : false;
-                  vote.down ? targetElement.setAttribute('data-vote-down', vote.down ) : false;
-                  targetElement.classList.add('voted')
-                } else {
-                  console.log(vote)
-                }
+                    vote.up ? targetElement.setAttribute('data-vote-up', vote.up) : targetElement.removeAttribute('data-vote-up');
+                    vote.down ? targetElement.setAttribute('data-vote-down', vote.down) : targetElement.removeAttribute('data-vote-down');
+                    targetElement.classList.add('voted')
+                } else {}
             }
         })
     }
     var displayVotes = function (params) {
-        const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes.json`;
-        console.log('dis[a]')
+        const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${params.fileid}/votes.json`;
         Api.getApi(url)
             .then((response) => {
                 votes = response ? response : []
@@ -338,15 +379,18 @@ var Vote = (function () {
             })
             .catch(error => console.error('Error:', error));
     }
-
     return {
         displayVotes: displayVotes,
         castVote: castVote
     }
 })();
 
+const FIREBASE_PROJECT_ID = 'opdracht-2-iteratie';
+
 var Api = (function () {
+
     const REVIEW_ELEM_SELECTOR = '.fn-review-elem';
+
 
     var init = function () {
 
@@ -388,11 +432,11 @@ var Api = (function () {
 
     async function post(url, postData) {
         let response = await fetch(url, {
-          method: 'PUT', 
-          body: JSON.stringify(postData), 
-          headers: {
-              'Content-Type': 'application/json'
-          }
+            method: 'PUT',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         let data = await response.json()
         return data;
@@ -401,7 +445,7 @@ var Api = (function () {
     var displayView = function (name, params) {
 
         if(name == 'home') {
-            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review.json`;
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review.json`;
             const templateUrl = 'home.ejs';
 
             mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
@@ -409,13 +453,21 @@ var Api = (function () {
             });
         } else if(name == 'review') {
 
-            const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
             const templateUrl = 'review.ejs';
 
             mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
                 ee.emitEvent(CREATED_VIEW_E, [name]);
                 displayCode(data)
 
+            });
+        } else if(name == 'thanks') {
+
+            const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}.json`;
+            const templateUrl = 'thanks.ejs';
+
+            mergePartialWithData(params, url, templateUrl, 'created-partial', APP_SELECTOR, function (data) {
+                ee.emitEvent(CREATED_VIEW_E, [name]);
             });
         }
     }
@@ -458,7 +510,7 @@ var Api = (function () {
     }
 
     var updateReviewedFile = function (params) {
-        let url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files.json`;
+        let url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files.json`;
 
         let files;
 
@@ -472,7 +524,7 @@ var Api = (function () {
                     return !item.reviewed;
                 })
                 first.reviewed = true;
-                const url = `https://${keys.FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${first.id}.json`;
+                const url = `https://${FIREBASE_PROJECT_ID}.firebaseio.com/review/${params.reviewid}/files/${first.id}.json`;
                 fetch(url, {
                         method: 'PUT', // or 'PUT'
                         body: JSON.stringify(first), // data can be `string` or {object}!
@@ -489,8 +541,8 @@ var Api = (function () {
             })
 
     }
-    
-  
+
+
 
 
 

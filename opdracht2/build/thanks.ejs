@@ -1,0 +1,99 @@
+<%
+  var currentFile = data.files[data.files.length-1]
+console.log(data.files.length - 1, data.files, currentFile)
+  
+  var finishedFiles = data.files.filter((item) => {
+    return item.reviewed
+  }).length
+  var progress = 100;
+console.log(data)
+ %>
+<div class="layout layout--detail">
+  <div class="layout--left">
+    <div class="fn-api-file"> 
+<header class='header-review'>
+  <h2 class='header__title'>
+    <%= data.repoName %>/
+    <%= currentFile.name %>
+  </h2>
+  <progress class='progress' value="<%= progress %>" max="100">
+  </progress>
+  <p>Review voortgang:
+    <%= data.params.fileid %> van de
+    <%= data.files.length %> afgerond
+  </p>
+</header> </div>
+  </div>
+  <div class="layout--right">
+    <aside class=""></aside>
+  </div>
+</div>
+<article class="">
+  <h3>Bedankt voor het achterlaten van je code review!</h3>
+  <p>Stuur nog een algemeen bericht mee met je feedback.</p>
+  <section class='article--brief'>
+    <h3>
+  
+      <h3>Hi <span class='label'>
+          <%= data.student.trim() %></span>,</h3></br>
+      <h3>Ik vondt je codebase </h3>
+      <input list="list-1" class='fn-focus fn-autocomplete' name="list-1" autocomplete="off" placeholder="fantastisch">
+      <datalist id="list-1">
+        <option value="echt verschrikkelijk.">
+        <option value="fantastisch!">
+        <option value="niets. Ik kon 'm niet openen.'">
+        <option value="naar behoren">
+      </datalist>
+      <h3>De manier waarop je je functies schrijft is </h3>
+      <input list="list-2" class='fn-focus fn-autocomplete' name="list-2" autocomplete="off" placeholder="netjes">
+      <datalist id="list-2">
+        <option value="netjes">
+        <option value="onleesbaar. Ik snapte er weinig van.">
+        <option value="professioneel'">
+        <option value="naar behoren">
+      </datalist>
+      <input list="list-3" class='fn-focus fn-autocomplete' name="list-3" autocomplete="off" placeholder="maar">
+      <datalist id="list-3">
+        <option value="maar">
+        <option value="en">
+      </datalist>
+      <h3> de technieken die je gebruikt</h3> <input list="list-7" class='fn-focus fn-autocomplete' name="list-7" autocomplete="off" placeholder="zijn minimaal">
+      <datalist id="list-7">
+        <option value="zijn minimaal">
+        <option value="werken niet op oudere browsers">
+        <option value="zijn te gek!">
+        <option value="blijven erg bij de basis.">
+        <option value="lossen je doelstelling niet op">
+      </datalist>
+      <h3>Jouw interpertatie van de opdracht is </h3>
+      <input list="list-4" class='fn-focus fn-autocomplete' name="list-4" autocomplete="off" placeholder="niet naar behoren">
+      <datalist id="list-4">
+        <option value="niet naar behoren">
+        <option value="goed gelukt">
+        <option value="met weinig toeters en bellen">
+        <option value="boven verwachting. Chapeau!">
+        <option value="Fantastisch!">
+      </datalist> , <h3> maar let volgende keer wel echt op dat je </h3>
+      <input list="list-5" class='fn-focus fn-autocomplete' name="list-5" autocomplete="off" placeholder="goed naar je gebruiker luistert">
+      <datalist id="list-5">
+        <option value="goed naar je gebruiker luistert">
+        <option value="niet je design challenge vergeet">
+        <option value="op tijd je spullen inlevert">
+        <option value="je demo online plaatst">
+        <option value="je code goed documenteert">
+      </datalist></br>
+      <input list="list-6" class='fn-focus fn-autocomplete' name="list-6" autocomplete="off" placeholder="groetjes"><datalist id="list-6">
+        <option value="groetjes,">
+        <option value="met vriendelijke groet,">
+        <option value="mail me voor de herkansing,">
+        <option value="fijn pasen,">
+      </datalist>
+    </h3></br>
+    <h3>Marijn</h3>
+  </section>
+</article>
+<footer class='footer footer-nav'>
+  <a href="/" class='button button--wide button--lg' data-navigo>
+    <div class="button__inner"> Opslaan en terug naar het overzicht </div>
+  </a>
+</footer>

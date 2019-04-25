@@ -1,14 +1,14 @@
 
 <article class="">
   <h2>Up for review</h2>
-  <p>The following items are put up for review:</p>
+  <p>De volgende items staan klaar voor de review:</p>
 </article>
 
 <ul class='list list--wide fn-list-review'>
   <% data.forEach(function(item) { %>
   <%
     let firstId = 'false';
-    
+    console.log(data)
       if(item.files) {
         firstId = item.files.find((file) => {
           

@@ -11,13 +11,15 @@
       const MULTI_SELECT_PARENT_SELECTOR = '.' + MULTI_SELECT_PARENT_CLASS;
 
       const FOCUS_CODE_SELECTOR = '.hljs-ln tbody > tr';
-      
+      const FOCUS_SELECTOR = '.fn-focus'
+
       let moveDate = new Date();
 
       var init = function () {
+
           SpatialNavigation.init();
           SpatialNavigation.add({
-              selector: 'a, .focusable, ' + FOCUS_CODE_SELECTOR
+              selector: 'a, .focusable, ' + FOCUS_CODE_SELECTOR + ', ' + FOCUS_SELECTOR
           });
           SpatialNavigation.makeFocusable();
       }
@@ -25,12 +27,42 @@
           SpatialNavigation.makeFocusable();
       }
 
+      var autocomplete = function () {
+
+          var inputs = document.querySelectorAll(".fn-autocomplete");
+          SpatialNavigation.resume();
+          inputs.forEach((input) => {
+              input.addEventListener('focus', onAutoFocus);
+              input.addEventListener('blur', onAutoBlur);
+              resizeInput(input);
+          })
+      }
+
+      var onAutoFocus = function (e) {
+          console.log('onAutoFocus');
+
+
+          SpatialNavigation.pause();
+      }
+
+      var onAutoBlur = function (e) {
+          resizeInput(e.currentTarget)
+          SpatialNavigation.resume();
+      }
+
+      var resizeInput = function (el) {
+          let value = el.value;
+          if(!value) {
+              value = el.placeholder
+          }
+          let width = value.length * 12;
+          el.style.width = Math.max(100, Math.min(width, 400)) + 'px';
+      }
+
       var setMultiSelectElement = function (elem) {
 
           elem.classList.add(MULTI_SELECT_CLASS)
-          
-          // console.log(document.querySelectorAll(MULTI_SELECT_SELECTOR + '-first').length)
-          // 
+
           if(!document.querySelectorAll(MULTI_SELECT_SELECTOR + '-first').length) {
               elem.classList.add(MULTI_SELECT_CLASS + '-first')
           }
@@ -56,45 +88,59 @@
           let selection = [];
           isMulti = false;
 
-          SpatialNavigation.pause();
+          // SpatialNavigation.pause();
 
           Mousetrap.bind('shift+down', function (e) {
-            console.log(`'shift+down', function (e) {`);
+              console.log('shift+down')
               moveDate = new Date();
-              moveSelection('down', false, document.activeElement);
-              
+              moveSelection('down', false, document.activeElement, true);
+
           });
           Mousetrap.bind('shift+up', function (e) {
-            console.log(`'shift+up', function (e) {`);
+              console.log('shift+up')
               isMulti = true;
               moveDate = new Date();
-              moveSelection('up', false, document.activeElement);
-              
+              moveSelection('up', false, document.activeElement, true);
+
           });
           Mousetrap.bind('down', function (e) {
-            console.log(`'down', function (e) {`);
+              console.log('down')
               moveDate = new Date();
-            moveSelection('down', true, document.activeElement);
-          });
+              moveSelection('down', true, document.activeElement.previousSibling, false);
+          }, true);
           Mousetrap.bind('up', function (e) {
-            console.log(`'up', function (e) {`);
+              e.preventDefault();
+              console.log('up')
               moveDate = new Date();
-              moveSelection('up', true, document.activeElement);
-          });
+              moveSelection('up', true, document.activeElement.previousSibling, false);
+          }, true);
       }
-      
-      var moveSelection = function (direction, shouldClean, elem) {
-        
-        if(shouldClean) {
-            clearSelection();
-        }
-        
-        SpatialNavigation.move(direction);
-        moveVoteNav(document.activeElement);
-        setMultiSelectElement(document.activeElement)
-        isMulti = false;
+
+      var moveSelection = function (direction, shouldClean, elem, move) {
+          scrollIntoViewCenter(elem);
+
+
+          if(shouldClean) {
+              clearSelection();
+          }
+          console.log({ move })
+          if(move) {
+              SpatialNavigation.move(direction);
+          }
+          moveVoteNav(elem);
+          setMultiSelectElement(elem)
+          isMulti = false;
       }
-      
+
+      var scrollIntoViewCenter = function (elem) {
+          Element.prototype.documentOffsetTop = function () {
+              return this.offsetTop + (this.offsetParent ? this.offsetParent.documentOffsetTop() : 0);
+          };
+
+          var top = elem.documentOffsetTop() - (window.innerHeight / 2);
+          window.scrollTo(0, top);
+      }
+
       var moveVoteNav = function (targetEl) {
           const bounds = targetEl.getBoundingClientRect();
           const parBounds = document.querySelector('.fn-review-elem').getBoundingClientRect();
@@ -104,7 +150,7 @@
       }
       var castVote = function (vote, type) {
           document.querySelectorAll('.is-multi-select').forEach((item) => {
-            console.log(item)
+
               Vote.castVote(item.firstChild.getAttribute('data-line-number'), type)
           })
       }
@@ -114,7 +160,7 @@
           votenavDown = votenav.querySelector('.fn-vote-down');
           voteHeight = votenav.getBoundingClientRect().height;
           let upTimeout;
-          
+
           Mousetrap.bind(['h', 'j', 'k', 'l'], function (e) {
               votenavUp.classList.add('animate');
               upTimeout = window.setTimeout(() => votenavUp.classList.remove('animate'), 100);
@@ -126,21 +172,22 @@
               castVote(votenav.getAttribute('data-current-index'), 'down');
           });
           document.querySelectorAll(FOCUS_CODE_SELECTOR).forEach((elem) => {
-            elem.addEventListener("blur", function (e) {
-              console.log('blur', e.currentTarget)
-              // if(e.currentTarget.classList.contains('is-multi-select')) {
-              //   clearSelection();
-              // }
-            });
+              elem.addEventListener("blur", function (e) {
+
+                  // if(e.currentTarget.classList.contains('is-multi-select')) {
+                  //   clearSelection();
+                  // }
+              });
 
               elem.addEventListener('focus', function (e) {
+
                   if(Math.abs(moveDate - new Date()) > 100) {
-                    clearSelection();
+                      clearSelection();
                   }
                   moveVoteNav(document.activeElement);
-                  
+
                   setMultiSelectElement(document.activeElement)
-                
+
               });
           })
       }
@@ -148,6 +195,7 @@
           init: init,
           update: update,
           multiSelect: multiSelect,
-          vote: vote
+          vote: vote,
+          autocomplete: autocomplete
       }
   })();

@@ -150,6 +150,11 @@ a:hover {
   text-decoration: underline;
 }
 
+body,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   padding-top: 72px;
 }
@@ -306,7 +311,7 @@ article *:focus ~ .nav-vote .nav-vote__item {
   bottom: 0;
   width: 100%;
   left: 0;
-  padding: 2em 1em;
+  padding: 2em 0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-align: center;
@@ -346,6 +351,23 @@ article table th:first-of-type {
   padding-left: 0.25em;
 }
 
+.article--brief {
+  border-top: 2px solid #4C4C4C;
+}
+
+.article--brief h3 {
+  line-height: 1.5;
+  display: inline-block;
+}
+
+.article--brief input {
+  border: 1px solid black;
+  line-height: 1.5;
+  display: inline-block;
+  font: inherit;
+  transition: 0.2s ease-in;
+}
+
 .article--code {
   position: relative;
   margin: 1em 0;
@@ -377,18 +399,7 @@ article table th:first-of-type {
 }
 
 .article--code .is-multi-select {
-  background-color: rgba(0, 0, 255, 0.1) !important;
-  padding: 0px;
-  border-left: 2px solid blue;
-  border-right: 2px solid blue;
-}
-
-.article--code .is-multi-select-first, .article--code .is-multi-select:first-child {
-  border-top: 2px solid blue;
-}
-
-.article--code .is-multi-select-last {
-  border-bottom: 2px solid blue;
+  background-color: rgba(0, 0, 255, 0.3) !important;
 }
 
 .hljs-ln {
@@ -417,8 +428,10 @@ article table th:first-of-type {
 
 .fn-review-elem .voted:before {
   position: absolute;
-  left: -5em;
+  left: -1em;
   font-size: 16px;
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
 }
 
 .is-selected .hljs-ln tr:not(.is-multi-select) {
@@ -482,6 +495,7 @@ article h5 {
 
 .button--wide {
   width: 100%;
+  margin: 0 0;
 }
 
 .button .ic + span,
@@ -491,6 +505,11 @@ article h5 {
 
 .button span {
   line-height: 1;
+}
+
+a:focus {
+  background-color: blue;
+  color: white;
 }
 
 .progress {

@@ -50,6 +50,7 @@
   
   &--wide {
     width: 100%;
+    margin: 0 0;
   }
 
   &__inner {
@@ -64,4 +65,10 @@
   span {
     line-height: 1;
   }
+}
+
+
+a:focus {
+  background-color: $color__accent;
+  color: $color__white;
 }
